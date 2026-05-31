@@ -1,0 +1,72 @@
+{
+  "month": "june",
+  "year": 2026,
+  "reporting_period": "June 1-30, 2026",
+  "workflows_count": 4,
+  "workflows_by_week": [
+    {
+      "week_ending": "2026-06-06",
+      "workflows_executed": 1,
+      "reports_generated": 3,
+      "time_spent_minutes": 65,
+      "issues": []
+    },
+    {
+      "week_ending": "2026-06-13",
+      "workflows_executed": 1,
+      "reports_generated": 3,
+      "time_spent_minutes": 62,
+      "issues": ["Transcript 1 slightly incomplete but manageable"]
+    }
+  ],
+  "time_savings": {
+    "baseline_per_week_minutes": 180,
+    "actual_per_week_average_minutes": 63.5,
+    "time_saved_per_week_minutes": 116.5,
+    "monthly_time_saved_minutes": 466,
+    "percentage_reduction": 64.7
+  },
+  "reports_count": {
+    "client_reports": 4,
+    "manager_reports": 4,
+    "action_items_trackers": 4
+  },
+  "quality_metrics": {
+    "quality_issues": 0,
+    "revisions_needed": 0,
+    "stakeholder_satisfaction": "positive"
+  },
+  "stakeholder_feedback": {
+    "Ken Manley": [
+      "Reports are clear and actionable",
+      "Appreciate the format consistency"
+    ],
+    "Shawn Fergusson": [
+      "Good summary of timeline impacts"
+    ],
+    "Gerardo Mora": [
+      "Detailed operational clarity",
+      "Risk mitigations are clear"
+    ]
+  },
+  "risks_occurred": [
+    {
+      "risk_name": "Transcript incomplete",
+      "what_happened": "One transcript was missing final 5 minutes",
+      "mitigation_worked": true,
+      "mitigation_used": "Nelson reviewed and noted in report",
+      "learnings": "Earlier validation of transcript completeness helps"
+    }
+  ],
+  "time_reinvestment": {
+    "Level 3 AI Assessment study": 6.0,
+    "Strategic planning": 1.0,
+    "Team mentorship": 1.0,
+    "Other priorities": 0.0
+  },
+  "additional_evidence": [
+    "Documentation of workflow is helping other PMs understand the pattern",
+    "Ad-hoc reports generated on-demand 3 times for urgent situations"
+  ],
+  "notes": "Workflows executing smoothly. Time savings consistent with baseline. Stakeholder feedback is positive."
+}
