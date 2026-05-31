@@ -62,10 +62,6 @@ For each month, create a file: `workflow_logs_[MONTH]_[YEAR].json`
     "actual_per_week_average_minutes": 65,
     "percentage_reduction": 63.9
   },
-  "stakeholder_feedback": {
-    "Ken Manley": ["Report is clear", "Good format"],
-    "Gerardo Mora": ["Operational detail appreciated"]
-  },
   "risks_occurred": [
     {
       "risk_name": "Missing transcript",
@@ -151,7 +147,6 @@ git push origin main
 
 ### Week 1 of Month
 - [ ] Gather workflow execution metrics
-- [ ] Collect stakeholder feedback
 - [ ] Document any risks that occurred
 - [ ] Note how freed time was reinvested
 - [ ] Create `workflow_logs_[MONTH]_[YEAR].json` file

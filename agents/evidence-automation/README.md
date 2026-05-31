@@ -6,7 +6,6 @@ Automated monthly updates to Level 3 evidence portfolio.
 
 ### 1. Data Collection (Weekly)
 - Workflow execution metrics (time spent, reports generated)
-- Stakeholder feedback signals (Slack reactions, email tone)
 - Risk events (what actually happened)
 - Metrics tracking (before/after comparisons)
 

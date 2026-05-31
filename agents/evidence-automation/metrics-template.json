@@ -36,19 +36,6 @@
     "revisions_needed": 0,
     "stakeholder_satisfaction": "positive"
   },
-  "stakeholder_feedback": {
-    "Ken Manley": [
-      "Reports are clear and actionable",
-      "Appreciate the format consistency"
-    ],
-    "Shawn Fergusson": [
-      "Good summary of timeline impacts"
-    ],
-    "Gerardo Mora": [
-      "Detailed operational clarity",
-      "Risk mitigations are clear"
-    ]
-  },
   "risks_occurred": [
     {
       "risk_name": "Transcript incomplete",

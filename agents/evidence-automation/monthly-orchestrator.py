@@ -92,8 +92,6 @@ You are updating Nelson's Level 3 evidence portfolio with {self.month.capitalize
 - Average per-workflow time: {self.metrics.get('avg_workflow_time', 0)} minutes
 - Quality issues: {self.metrics.get('quality_issues', 0)}
 
-### Stakeholder Feedback
-{self._format_stakeholder_feedback()}
 
 ### Risks That Occurred
 {self._format_risks_occurred()}
@@ -128,17 +126,6 @@ Reference: /Users/naraya/Documents/AI-Foundation/Level3 Evidence/AI Impact Evalu
 
         return prompt
 
-    def _format_stakeholder_feedback(self):
-        """Format stakeholder feedback from metrics"""
-        feedback = self.metrics.get('stakeholder_feedback', {})
-        formatted = ""
-
-        for stakeholder, comments in feedback.items():
-            formatted += f"\n**{stakeholder}:**\n"
-            for comment in comments:
-                formatted += f"- {comment}\n"
-
-        return formatted if formatted else "- No feedback collected yet"
 
     def _format_risks_occurred(self):
         """Format risks that actually occurred"""
