@@ -24,26 +24,36 @@ Agent(
 
 ---
 
-## Planned Agents
+## Planned Agents (Now Complete)
 
-### Evidence Validation 🔄
-- **Status:** Planned
+### Evidence Validation ✅
+- **Status:** Ready
 - **Purpose:** Validate evidence against Level 3 criteria and identify gaps
 - **Location:** `./evidence-validation/`
-- **Expected:** Before formal Level 3 submission
+- **Last Updated:** May 31, 2026
+- **Use:** Before formal Level 3 submission (October 2026)
+- **Files:**
+  - `README.md` - Overview and usage
+  - `prompt.md` - Full agent prompt with detailed validation criteria
 
-### Workflow Execution 🔄
-- **Status:** Planned
+### Workflow Execution ✅
+- **Status:** Ready
 - **Purpose:** Execute Thursday morning communication workflow
 - **Location:** `./workflow-execution/`
 - **Trigger:** User message "Weekly workflow ready — Week ending [DATE]"
-- **Expected:** First run June 6, 2026
+- **First Run:** June 6, 2026
+- **Files:**
+  - `README.md` - Overview and usage
+  - `prompt.md` - Complete execution prompt with all report templates
 
-### Risk Mitigation Auditor 🔄
-- **Status:** Planned
+### Risk Mitigation Auditor ✅
+- **Status:** Ready
 - **Purpose:** Identify and document risks in new AI workflows
 - **Location:** `./risk-auditor/`
-- **Expected:** Used for future workflow designs
+- **Use:** Design phase of any new AI workflow
+- **Files:**
+  - `README.md` - Overview and usage
+  - `prompt.md` - Comprehensive risk analysis framework
 
 ---
 
