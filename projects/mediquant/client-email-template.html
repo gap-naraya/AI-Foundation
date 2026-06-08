@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Project Status Update</title>
+</head>
+<body style="overflow-wrap: break-word; -webkit-nbsp-mode: space; line-break: after-white-space; font-family: Helvetica, Verdana, Arial, sans-serif;">
+
+<div style="padding:40px;margin:20px auto;border-radius:8px;max-width:600px">
+
+<!-- Header -->
+<div style="border-bottom:3px solid #2c3e50;padding-bottom:20px;margin-bottom:30px">
+    <h1 style="margin:0 0 10px 0;color:#2c3e50;font-size:24px">DOM PROJECT STATUS UPDATE</h1>
+    <div style="color:#7f8c8d;font-size:14px">June 5, 2026</div>
+</div>
+
+<!-- Executive Summary -->
+<div style="padding:15px;border-left:4px solid #3498db;margin-bottom:30px;border-radius:4px">
+    <div style="font-weight:bold;margin-bottom:10px;color:#2c3e50">Executive Summary</div>
+    <div>
+        <p style="font-size: 14px; margin: 0px 0px 10px;color:#333">
+            <strong>Core Team Execution:</strong> The team successfully completed New Project Smoke Testing today with full infrastructure validation, confirming end-to-end functionality. Multiple CI/CD build agents are now ready and operational, which improves our deployment speed and reliability. The team is actively working on completing repository readiness and resolving the final outstanding bugs. We are managing two blockers this week: Sean is temporarily occupied with a production issue that will be resolved shortly, and Roberto encountered an Azure permissions issue to provision the Admin Security Group—we have escalated this to your IT team for support. We expect full progress to resume by tomorrow.
+        </p>
+        <p style="font-size: 14px; margin: 0px;color:#333">
+            <strong>Compliance & Architecture Review:</strong> We received preliminary feedback from EastinIT on the architecture assessment, and the overall evaluation is that the project is "architecturally sound." This is excellent validation of our design approach. Sean will continue his work on HIPAA compliance policies once the production issue is resolved. We are coordinating with your IT team on the permission-related items and expect to maintain full forward momentum by tomorrow.
+        </p>
+    </div>
+</div>
+
+<!-- Workstream 1 -->
+<div style="margin-bottom:35px">
+    <div style="font-size:16px;font-weight:bold;color:#2c3e50;margin-bottom:15px;padding-bottom:8px;border-bottom:2px solid #ecf0f1">CORE TEAM EXECUTION – <span style="color:#e74c3c;font-weight:bold">OFF TRACK</span></div>
+
+    <div style="padding:12px;margin-bottom:15px;border-radius:4px;font-size:14px;color:#333">
+        <strong>Objective:</strong> Fully functional, testable environment (HiTrust/HIPAA-compliant) by June 5
+    </div>
+
+    <div style="margin-bottom:15px;font-size:14px;font-weight:bold;color:#2c3e50">Progress: 83% complete (20 of 23 tasks)</div>
+
+    <div style="padding:15px;border-left:4px solid #27ae60;margin-bottom:15px;border-radius:4px">
+        <div style="font-weight:bold;margin-bottom:8px;color:#1e8449">Delivered Today:</div>
+        <ul style="margin-left:20px;list-style-type:disc;padding:0;font-size:14px;color:#333">
+            <li style="margin-bottom:6px">New Project Smoke Testing completed (validates end-to-end functionality)</li>
+            <li style="margin-bottom:6px">Multiple CI/CD build agents ready and working (improves deployment capacity)</li>
+        </ul>
+    </div>
+
+    <div style="padding:15px;border-left:4px solid #e74c3c;margin-bottom:15px;border-radius:4px">
+        <div style="font-weight:bold;margin-bottom:8px;color:#c0392b">Blocker:</div>
+        <ul style="margin-left:20px;list-style-type:disc;padding:0;font-size:14px;color:#333">
+            <li style="margin-bottom:6px">Sean temporarily unavailable due to production issue (expected resolution today; will resume HIPAA work tomorrow)</li>
+            <li style="margin-bottom:6px">Roberto working through Azure permissions issue for Admin Security Group provisioning (your IT support ticket is in progress)</li>
+            <li style="margin-bottom:6px">Final sprint bug requires frontend and DevOps coordination to complete</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Workstream 2 -->
+<div style="margin-bottom:35px">
+    <div style="font-size:16px;font-weight:bold;color:#2c3e50;margin-bottom:15px;padding-bottom:8px;border-bottom:2px solid #ecf0f1">COMPLIANCE & ARCHITECTURE REVIEW – <span style="color:#e74c3c;font-weight:bold">OFF TRACK</span></div>
+
+    <div style="padding:12px;margin-bottom:15px;border-radius:4px;font-size:14px;color:#333">
+        <strong>Objective:</strong> EastinIT Architecture Design assessment delivered by June 5
+    </div>
+
+    <div style="margin-bottom:15px;font-size:14px;font-weight:bold;color:#2c3e50">Progress: 86% complete (6 of 7 tasks)</div>
+
+    <div style="padding:15px;border-left:4px solid #27ae60;margin-bottom:15px;border-radius:4px">
+        <div style="font-weight:bold;margin-bottom:8px;color:#1e8449">Delivered Today:</div>
+        <ul style="margin-left:20px;list-style-type:disc;padding:0;font-size:14px;color:#333">
+            <li style="margin-bottom:6px">EastinIT preliminary architecture review completed (feedback: "architecturally sound")</li>
+        </ul>
+    </div>
+
+    <div style="padding:12px 15px;border-left:4px solid #bdc3c7;margin-bottom:15px;border-radius:4px;font-size:14px;color:#7f8c8d">
+        <strong>Blockers:</strong> None to report
+    </div>
+</div>
+
+<!-- Actions Required -->
+<div style="padding:20px;border-radius:4px;margin-top:30px;background-color:#f8f9fa">
+    <h3 style="margin-top:0;color:#2c3e50;font-size:16px">ACTIONS REQUIRED</h3>
+    <ol style="margin:0;padding-left:20px;color:#333">
+        <li style="margin-bottom:10px;font-size:14px"><strong>Jun 05:</strong> Resolve production issue (Sean — internal)</li>
+        <li style="margin-bottom:10px;font-size:14px"><strong>Jun 05:</strong> MQ IT — provision Admin Security Group for Databricks access (escalation in progress)</li>
+        <li style="margin-bottom:10px;font-size:14px"><strong>Jun 06:</strong> Complete final repository readiness bugs (frontend and DevOps coordination)</li>
+        <li style="margin-bottom:10px;font-size:14px"><strong>Jun 09:</strong> Final agreement on HIPAA policy baseline</li>
+    </ol>
+</div>
+
+<!-- Signature -->
+<div style="border-top:1px solid #ecf0f1;padding-top:20px;margin-top:40px">
+    <p style="font-size: 12px; margin: 0 0 10px 0;color:#333">Best Regards,</p>
+    <p style="font-size: 13px; margin: 0; line-height: 1.8;color:#333">
+        <strong>Nelson Araya Alvarado</strong><br>
+        <span style="color:#7f8c8d">Project Manager</span><br>
+        <strong style="color:#2c3e50">Growth Acceleration Partners (GAP)</strong><br>
+        <br>
+        <span style="color:#7f8c8d"><strong>Email:</strong> <span style="color:#3498db;">naraya@growthaccelerationpartners.com</span></span><br>
+        <span style="color:#7f8c8d"><strong>Website:</strong> <span style="color:#333">WeAreGAP.com</span></span><br>
+        <span style="color:#7f8c8d"><strong>Phone:</strong> (506) 7173-7787</span>
+    </p>
+</div>
+
+</div>
+
+</body>
+</html>
