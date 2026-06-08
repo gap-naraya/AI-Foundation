@@ -9,7 +9,7 @@ project.
 that touch the same project can also load this file for the
 stakeholder cast, acronyms, and recurring themes.
 
-**Last updated:** 2026-06-07
+**Last updated:** 2026-06-08
 
 ---
 
@@ -43,6 +43,21 @@ stakeholder cast, acronyms, and recurring themes.
   *(do not change unless officially re-baselined)*
 - **Most recent reported state:** OFF TRACK, 86% complete (6 of 7
   tasks) as of Jun 05, 2026
+
+---
+
+## Client email recipients
+
+**To (Client stakeholders):**
+- Shawn Fergason <sfergason@mediquant.com> (approval authority)
+- Ken Manley <kenm@mediquant.com> (client executive)
+
+**Cc (GAP team members):**
+- Milagro Prado Vasquez <mprado@growthaccelerationpartners.com>
+- Matt Veitch <matt.veitch@growthaccelerationpartners.com>
+- Steven Yelton <syelton@growthaccelerationpartners.com>
+
+**From:** Nelson Araya Alvarado <naraya@growthaccelerationpartners.com> (or sent by delivery manager on behalf of team)
 
 ---
 

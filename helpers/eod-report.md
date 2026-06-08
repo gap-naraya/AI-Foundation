@@ -8,17 +8,22 @@
 
 ## Purpose
 
-Takes raw daily notes and produces a polished end-of-day project status
-report in **two formats side by side**:
+Takes raw daily notes and produces polished end-of-day project status
+reports in **two or three formats**:
 
-1. **STANDARD** — the current boss-approved format
-2. **OPTIMIZED** — same content with three additive enhancements
-   (pending boss approval)
+1. **STANDARD** — internal Slack format (boss-approved)
+2. **CLIENT EMAIL** — same content, transformed for client audience
+   (formal tone, no internal trajectory tags, more explanatory)
+3. **OPTIMIZED** — Standard + three additive enhancements (pending boss
+   approval)
 
-The two-output design serves two goals:
-- Daily: see both, pick which to send
-- One-time: use the side-by-side as a pitch artifact when proposing the
-  optimizations to a boss
+The multi-format design serves three goals:
+- **Daily:** generate Slack + client email from the same notes (30 min
+  faster than writing separately)
+- **One-time pitch:** use Standard + Optimized side-by-side when
+  proposing trajectory tags / slippage markers to your boss
+- **Consistency:** same content, different packaging for different
+  audiences
 
 This file is a **generic template**. Project-specific details (project
 codename, client, stakeholder cast, acronyms, workstream objectives)
@@ -34,15 +39,19 @@ project context file to load**:
 
 > Run my EoD report helper. Use the format definitions and voice rules
 > in `helpers/eod-report.md`, and project context from
-> `projects/<your-project>/eod-report.context.md`. Generate BOTH the
-> standard and optimized versions side by side. My raw notes for today:
+> `projects/<your-project>/eod-report.context.md`. Generate the STANDARD
+> (Slack) and CLIENT EMAIL versions. My raw notes for today:
 >
 > [paste notes — bullets, copy-pastes from Slack/Jira, paragraphs,
 > stream-of-consciousness, all fine; no need to clean up first]
 
-To get **accurate slippage markers** in the optimized version, also paste
-yesterday's report below today's notes. Without prior-day context, the
-helper will skip slip markers rather than guess.
+**Optional:** To get **accurate slippage markers** (if proposing OPTIMIZED
+format to your boss later), also paste yesterday's report below today's
+notes. Without prior-day context, the helper will skip slip markers rather
+than guess.
+
+**Optional:** To also see the OPTIMIZED version (Standard + trajectory tags
++ slippage markers), add: "Also generate OPTIMIZED for comparison."
 
 ---
 
@@ -110,9 +119,104 @@ ACTIONS REQUIRED:
 
 ---
 
-## OUTPUT FORMAT 2 — OPTIMIZED (pending boss approval)
+## OUTPUT FORMAT 2 — CLIENT EMAIL (v2 — uses STANDARD content, transforms for client audience)
 
-Three additive enhancements vs Standard. Everything else identical.
+Use the STANDARD format content. Transform it using these rules:
+
+### Structure (match the sample email layout exactly)
+
+```
+Subject: [PROJECT_NAME] Project Status Update | [Date]
+
+To: [Client stakeholders — use full names and email addresses from context]
+Cc: [GAP team members per project context]
+From: [Your name and title — may be sent by delivery manager on behalf of team]
+
+---
+
+[BODY — plain text or HTML]
+
+[PROJECT_NAME] PROJECT STATUS UPDATE
+[Date in format: Month DD, YYYY]
+
+Executive Summary
+
+[Workstream 1 name]: [2-3 sentence narrative — what shipped, current state, forward commitment. More explanatory than Slack version; include business impact where relevant]
+
+[Workstream 2 name]: [2-3 sentence narrative — same shape]
+
+
+[WORKSTREAM 1 NAME] – [ON TRACK / AT RISK / OFF TRACK]
+
+Objective: [stable text from context]
+
+Progress: [X]% complete ([A] of [B] tasks)
+
+Delivered Today:
+- [bullet]
+- [bullet]
+
+Blocker:
+- [bullet OR "None to report"]
+
+
+[WORKSTREAM 2 NAME] – [STATUS]
+
+Objective: [stable text from context]
+
+Progress: [X]% complete ([A] of [B] tasks)
+
+Delivered Today:
+- [bullet OR "None to report"]
+
+Blockers: [bullet OR "None to report"]
+
+
+ACTIONS REQUIRED
+
+[Date]: [action]
+[Date]: [action]
+
+Best Regards,
+
+[Your name]
+[Your title]
+Growth Acceleration Partners (GAP)
+Email: [Your email]
+Website: WeAreGAP.com
+Phone: [Your phone]
+```
+
+### Transformation rules (STANDARD → CLIENT EMAIL)
+
+**What stays the same:**
+- Workstream names, objectives, progress %, delivered items, blockers, action dates
+- Overall structure and logical flow
+
+**What changes:**
+1. **Executive Summary:** Expand from 2-4 sentences to more explanatory 3-4 sentence narrative. Include context on *why* deliverables matter (e.g., "CI/CD pipeline improves deployment speed and reliability"). Avoid internal jargon; assume client audience may not know GAP-specific tools or acronyms.
+2. **Delivered items:** Add brief context if needed (e.g., "New Project Smoke Testing completed" → "New Project Smoke Testing completed (validates end-to-end functionality)"). Keep bullets concise.
+3. **Tone:** Professional, formal closing. First names only acceptable but use full names in email header. No emojis, no Slack shorthand.
+4. **Acronyms:** Keep only well-known ones (HIPAA, CI/CD). Define others on first mention (e.g., "Azure Functions (serverless compute)").
+5. **Dates:** Format as "Mon DD" in headers but preserve exact dates in ACTIONS REQUIRED (e.g., "Jun 05").
+
+**What to remove:**
+- No trajectory tags (RECOVERING / HOLDING / SLIPPING) — client doesn't need to see internal trajectory framing
+- No slippage markers from prior dates — present cleanly without historical context
+- No forward-looking speculation ("we might..."); use commitments only
+
+### When to use this format
+
+- Weekly or daily reports sent to client stakeholders (Shawn F, Ken, etc.)
+- Canonical source is always the STANDARD Slack version
+- Client email is a *translation*, not new information
+- Send same day or next morning; timestamp matches when Slack was generated
+
+---
+
+## OUTPUT FORMAT 3 — OPTIMIZED (pending boss approval)
+
+Three additive enhancements vs Standard (when approved). Everything else identical.
 
 ### Enhancement 1: One-sentence headline at the top
 
@@ -176,7 +280,7 @@ When invoked, do this in order:
 1. **Read the project context file** the user specified (e.g.,
    `projects/<project>/eod-report.context.md`) for project-specific
    details: project codename, workstream names + objectives,
-   stakeholder roles, acronym glossary. If not specified or missing,
+   stakeholder roles, acronym glossary, client names. If not specified or missing,
    use generic placeholders and flag it.
 
 2. **Parse raw notes** into:
@@ -190,24 +294,29 @@ When invoked, do this in order:
    - Use causal framing
    - Include at least one forward-looking statement
 
-4. **Produce STANDARD format first.**
+4. **Produce STANDARD format first** (internal Slack version).
 
-5. **Produce OPTIMIZED format second** with the three enhancements
-   applied. If yesterday's report is not in context, skip slippage
-   markers and note that explicitly.
+5. **Produce CLIENT EMAIL format second** by transforming the Standard
+   content using the rules in OUTPUT FORMAT 2 (more narrative, formal
+   closing, client-friendly tone, remove trajectory tags).
 
-6. **Present both side by side**, each clearly labeled.
+6. **Produce OPTIMIZED format third** (if requested) with the three
+   enhancements applied to Standard. If yesterday's report is not in
+   context, skip slippage markers and note that explicitly.
 
-7. **Flag clarifying questions** for missing progress numbers, ambiguous
-   ownership, unclear status. Don't invent data — ask.
+7. **Present all requested formats**, clearly labeled. Default: STANDARD
+   + CLIENT EMAIL. OPTIMIZED on request.
+
+8. **Flag clarifying questions** for missing progress numbers, ambiguous
+   ownership, unclear status, missing client stakeholder list. Don't invent
+   data — ask.
 
 ---
 
 ## What this helper does NOT do (yet)
 
 - Pull from Slack / Jira / email automatically (notes still manual)
-- Generate the client email version (v2)
-- Send messages for you (you review and send manually)
+- Send messages or emails for you (you review and send manually)
 - Detect slippage without context (paste yesterday's report alongside
   today's notes if you want slip markers)
 
@@ -215,5 +324,8 @@ When invoked, do this in order:
 
 ## Changelog
 
+- **2026-06-08** — v2 released. Added CLIENT EMAIL format. Now generates
+  STANDARD (Slack) + CLIENT EMAIL by default. OPTIMIZED available on
+  request. Uses sample Gerardo Mora email (Jun 5) as structure reference.
 - **2026-06-07** — v1 created. Slack only. Standard + optimized
   formats. Client email derivative pending.
