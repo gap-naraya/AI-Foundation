@@ -10,7 +10,7 @@
 
 ## About Nelson
 
-To understand who Nelson is, always refer to these files before making recommendations or decisions on her behalf:
+To understand who Nelson is, always refer to these files before making recommendations or decisions on his behalf:
 
   - **Personal Constitution** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/Personal_Constitution.md`
   - **2026 Goals** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/2026_Goals_Context.md`
