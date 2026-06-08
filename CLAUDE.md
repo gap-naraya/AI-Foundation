@@ -12,11 +12,11 @@
 
 To understand who Nelson is, always refer to these files before making recommendations or decisions on his behalf:
 
-  - **Personal Constitution** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/Personal_Constitution.md`
-  - **2026 Goals** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/2026_Goals_Context.md`
-  - **Career Context** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/Career_Context_Document.md`
-  - **Communication Style** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/Communication_Context.md`
-  - **Business Context** → `/Users/naraya/Documents/AI-Foundation/Claude Context Docs/Business_Context.md`
+  - **Personal Constitution** → `/Users/naraya/Documents/AI-Foundation/context/Personal_Constitution.md`
+  - **2026 Goals** → `/Users/naraya/Documents/AI-Foundation/context/2026_Goals_Context.md`
+  - **Career Context** → `/Users/naraya/Documents/AI-Foundation/context/Career_Context_Document.md`
+  - **Communication Style** → `/Users/naraya/Documents/AI-Foundation/context/Communication_Context.md`
+  - **Business Context** → `/Users/naraya/Documents/AI-Foundation/context/Business_Context.md`
 
 ## Current Context
 Executing a complex project currently off-track, creating monetary and business complications due to high client relevance. Operating under time pressure with a strained client relationship. C-level visibility across the company on project status and progress. Environment requires careful, data-driven communication and rapid, efficient decision-making.
