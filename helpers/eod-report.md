@@ -126,91 +126,55 @@ what's in flight, key issues, forward commitments]
 
 ---
 
-## OUTPUT FORMAT 2 — CLIENT EMAIL (v2 — uses STANDARD content, transforms for client audience)
+## OUTPUT FORMAT 2 — CLIENT EMAIL (v2 — HTML format using project template)
 
-Use the STANDARD format content. Transform it using these rules:
+Use the STANDARD format content. Transform it using these rules and render in HTML.
 
-### Structure (match the sample email layout exactly)
+### Structure
 
+Client email is rendered as **HTML** using the project's email template at `projects/<project>/client-email-template.html`. The template provides:
+- Professional color scheme and typography
+- Color-coded status sections (green = delivered, red = blockers, blue accents)
+- Progress indicators with percentages and task counts (e.g., "83% complete (20 of 23 tasks)")
+- Responsive layout for mobile and desktop clients
+- Standard signature block with contact info
+
+Email metadata:
 ```
-Subject: [PROJECT_NAME] Project Status Update | [Date]
+Subject: [PROJECT_NAME] PROJECT STATUS UPDATE - [Date in format: Mon DD, YYYY]
 
 To: [Client stakeholders — use full names and email addresses from context]
 Cc: [GAP team members per project context]
-From: [Your name and title — may be sent by delivery manager on behalf of team]
-
----
-
-[BODY — plain text or HTML]
-
-[PROJECT_NAME] PROJECT STATUS UPDATE
-[Date in format: Month DD, YYYY]
-
-Executive Summary
-
-[Workstream 1 name]: [2-3 sentence narrative — what shipped, current state, forward commitment. More explanatory than Slack version; include business impact where relevant]
-
-[Workstream 2 name]: [2-3 sentence narrative — same shape]
-
-
-[WORKSTREAM 1 NAME] – [ON TRACK / AT RISK / OFF TRACK]
-
-Objective: [stable text from context]
-
-Progress: [X]% complete ([A] of [B] tasks)
-
-Delivered Today:
-- [bullet]
-- [bullet]
-
-Blocker:
-- [bullet OR "None to report"]
-
-
-[WORKSTREAM 2 NAME] – [STATUS]
-
-Objective: [stable text from context]
-
-Progress: [X]% complete ([A] of [B] tasks)
-
-Delivered Today:
-- [bullet OR "None to report"]
-
-Blockers: [bullet OR "None to report"]
-
-
-ACTIONS REQUIRED
-
-[Date]: [action]
-[Date]: [action]
-
-Best Regards,
-
-[Your name]
-[Your title]
-Growth Acceleration Partners (GAP)
-Email: [Your email]
-Website: WeAreGAP.com
-Phone: [Your phone]
+From: [Your name and title]
 ```
 
-### Transformation rules (STANDARD → CLIENT EMAIL)
+### Content transformation (STANDARD → CLIENT EMAIL)
 
-**What stays the same:**
-- Workstream names, objectives, progress %, delivered items, blockers, action dates
-- Overall structure and logical flow
+Take the STANDARD format content and adapt it for client audience:
 
-**What changes:**
 1. **Executive Summary:** Expand from 2-4 sentences to more explanatory 3-4 sentence narrative. Include context on *why* deliverables matter (e.g., "CI/CD pipeline improves deployment speed and reliability"). Avoid internal jargon; assume client audience may not know GAP-specific tools or acronyms.
 2. **Delivered items:** Add brief context if needed (e.g., "New Project Smoke Testing completed" → "New Project Smoke Testing completed (validates end-to-end functionality)"). Keep bullets concise.
-3. **Tone:** Professional, formal closing. First names only acceptable but use full names in email header. No emojis, no Slack shorthand.
+3. **Tone:** Professional, formal. First names only acceptable but use full names in email subject/header. No emojis, no Slack shorthand.
 4. **Acronyms:** Keep only well-known ones (HIPAA, CI/CD). Define others on first mention (e.g., "Azure Functions (serverless compute)").
 5. **Dates:** Format as "Mon DD" in headers but preserve exact dates in ACTIONS REQUIRED (e.g., "Jun 05").
+6. **Status & Progress:** Keep progress percentages and task counts verbatim. Use status labels (ON TRACK / AT RISK / OFF TRACK) without trajectory tags.
 
 **What to remove:**
 - No trajectory tags (RECOVERING / HOLDING / SLIPPING) — client doesn't need to see internal trajectory framing
 - No slippage markers from prior dates — present cleanly without historical context
 - No forward-looking speculation ("we might..."); use commitments only
+- No emojis or Slack formatting
+
+### Rendering to HTML
+
+After transforming content, populate the HTML template with:
+- Subject line and date
+- Executive Summary paragraphs
+- Workstream sections (Objective, Progress %, Delivered, Blockers)
+- Actions Required list with dates
+- Signature block
+
+The template handles all styling, colors, borders, and responsive layout. Your job is content transformation only.
 
 ### When to use this format
 
@@ -218,6 +182,7 @@ Phone: [Your phone]
 - Canonical source is always the STANDARD Slack version
 - Client email is a *translation*, not new information
 - Send same day or next morning; timestamp matches when Slack was generated
+- Always render as HTML using the project template for consistency and polish
 
 ---
 
@@ -287,7 +252,7 @@ When invoked, do this in order:
 1. **Read the project context file** the user specified (e.g.,
    `projects/<project>/eod-report.context.md`) for project-specific
    details: project codename, workstream names + objectives,
-   stakeholder roles, acronym glossary, client names. If not specified or missing,
+   stakeholder roles, acronym glossary, client names, email stakeholder list. If not specified or missing,
    use generic placeholders and flag it.
 
 2. **Parse raw notes** into:
@@ -297,26 +262,30 @@ When invoked, do this in order:
    - Progress signals (% completion, ratios, deadline movement)
 
 3. **Draft Executive Summary narratives** (judgment-heavy):
-   - 2-4 sentences per workstream
+   - 2-4 sentences per workstream (Slack version)
    - Use causal framing
    - Include at least one forward-looking statement
 
-4. **Produce STANDARD format first** (internal Slack version).
+4. **Produce STANDARD format first** (internal Slack version with emojis,
+   progress indicators, status indicators, visual hierarchy).
 
-5. **Produce CLIENT EMAIL format second** by transforming the Standard
-   content using the rules in OUTPUT FORMAT 2 (more narrative, formal
-   closing, client-friendly tone, remove trajectory tags).
+5. **Produce CLIENT EMAIL format second** by:
+   - Transforming STANDARD content using the rules in OUTPUT FORMAT 2
+     (expand narrative, remove emojis, client-friendly tone, remove trajectory tags)
+   - Rendering transformed content into HTML using the project's email
+     template at `projects/<project>/client-email-template.html`
+   - HTML template handles all styling, colors, and responsive layout
 
 6. **Produce OPTIMIZED format third** (if requested) with the three
    enhancements applied to Standard. If yesterday's report is not in
    context, skip slippage markers and note that explicitly.
 
 7. **Present all requested formats**, clearly labeled. Default: STANDARD
-   + CLIENT EMAIL. OPTIMIZED on request.
+   + CLIENT EMAIL (both ready to use). OPTIMIZED on request.
 
 8. **Flag clarifying questions** for missing progress numbers, ambiguous
-   ownership, unclear status, missing client stakeholder list. Don't invent
-   data — ask.
+   ownership, unclear status, missing client stakeholder list, missing email
+   template file. Don't invent data — ask.
 
 ---
 
