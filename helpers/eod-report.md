@@ -68,53 +68,60 @@ than guess.
   "in progress" or similar
 - Do not invent new sections or add commentary outside the defined
   format
+- **Emojis in STANDARD format:** Use headline emoji (📊 for title, 🔧/✅ for workstreams, 📋 for actions), progress emoji (📈), and status emoji (⚠️ for OFF TRACK / AT RISK). These improve visual scannability on mobile Slack.
 
 ---
 
 ## OUTPUT FORMAT 1 — STANDARD (boss-approved, default until further notice)
 
 ```
-[PROJECT_NAME] PROJECT STATUS UPDATE
-[date in format: Mon XX, YYYY]
+# 📊 [PROJECT_NAME] PROJECT STATUS UPDATE
+**Mon XX, YYYY**
 
-EXECUTIVE SUMMARY
+---
+
+## EXECUTIVE SUMMARY
 
 [Workstream 1 name], [2-4 sentence narrative covering what shipped,
 what's in flight, key issues, forward commitments]
 
 [Workstream 2 name], [2-4 sentence narrative, same shape]
 
+---
 
-[WORKSTREAM 1 NAME] - [ON TRACK / AT RISK / OFF TRACK]
+## 🔧 [WORKSTREAM 1 NAME] — ⚠️ [ON TRACK / AT RISK / OFF TRACK]
 
-Objective: [stable text from context]
+**Objective:** [stable text from context]
 
-Progress: [X]% complete ([A] of [B] tasks)
+**Progress:** 📈 [X]% complete ([A] of [B] tasks)
 
-DELIVERED TODAY:
+**DELIVERED TODAY:**
 - [bullet]
 - [bullet]
 
-BLOCKERS:
+**BLOCKERS:**
 - [bullet OR "NTR"]
 
+---
 
-[WORKSTREAM 2 NAME] - [STATUS]
+## ✅ [WORKSTREAM 2 NAME] — ⚠️ [STATUS]
 
-Objective: [stable text from context]
+**Objective:** [stable text from context]
 
-Progress: [X]% complete ([A] of [B] tasks)
+**Progress:** 📈 [X]% complete ([A] of [B] tasks)
 
-DELIVERED:
+**DELIVERED TODAY:**
 - [bullet OR "NTR"]
 
-BLOCKER
+**BLOCKERS:**
 - [bullet OR "NTR"]
 
+---
 
-ACTIONS REQUIRED:
-- [date]: [action]
-- [date]: [action]
+## 📋 ACTIONS REQUIRED:
+
+- **[date]:** [action]
+- **[date]:** [action]
 ```
 
 ---
