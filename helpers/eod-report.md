@@ -34,24 +34,28 @@ live in a separate context file alongside each project (e.g.,
 
 ## How to use
 
-In a Claude conversation, paste this prompt and **tell Claude which
-project context file to load**:
+In a Claude conversation, paste this prompt:
 
-> Run my EoD report helper. Use the format definitions and voice rules
-> in `helpers/eod-report.md`, and project context from
-> `projects/<your-project>/eod-report.context.md`. Generate the STANDARD
-> (Slack) and CLIENT EMAIL versions. My raw notes for today:
->
-> [paste notes — bullets, copy-pastes from Slack/Jira, paragraphs,
-> stream-of-consciousness, all fine; no need to clean up first]
+> Run EoD helper for [project]. Raw notes: [paste today's notes]
 
-**Optional:** To get **accurate slippage markers** (if proposing OPTIMIZED
-format to your boss later), also paste yesterday's report below today's
-notes. Without prior-day context, the helper will skip slip markers rather
-than guess.
+**Default behavior:** Uses current context + lightweight previous snapshot (`eod-report.previous.md`) for slippage detection. Generates STANDARD (Slack) + CLIENT EMAIL.
 
-**Optional:** To also see the OPTIMIZED version (Standard + trajectory tags
-+ slippage markers), add: "Also generate OPTIMIZED for comparison."
+**Optional:** To also see OPTIMIZED version (trajectory tags + slippage markers), add: "Also generate OPTIMIZED."
+
+## How slippage detection works
+
+The helper automatically loads `projects/<project>/eod-report.previous.md` (lightweight snapshot file) to compare:
+- Progress % movement (increasing, holding, or regressing)
+- Key action dates (moved forward = slippage)
+- Status changes (ON TRACK → AT RISK = regression signal)
+
+**After each report**, update `previous.md` with:
+- New progress % and task counts
+- New status
+- Next key action dates
+- Major blockers
+
+Keep it to ~5-10 lines per workstream for minimal context overhead.
 
 ---
 
@@ -249,11 +253,10 @@ Rules:
 
 When invoked, do this in order:
 
-1. **Read the project context file** the user specified (e.g.,
-   `projects/<project>/eod-report.context.md`) for project-specific
-   details: project codename, workstream names + objectives,
-   stakeholder roles, acronym glossary, client names, email stakeholder list. If not specified or missing,
-   use generic placeholders and flag it.
+1. **Read the project files:**
+   - **Context file** (`projects/<project>/eod-report.context.md`) for project details: codename, workstream names + objectives, stakeholder roles, acronyms, client names
+   - **Previous snapshot** (`projects/<project>/eod-report.previous.md`) for yesterday's progress, status, key dates, blockers (for slippage comparison)
+   - If context file missing, use placeholders and flag it. If previous snapshot missing, skip slippage detection.
 
 2. **Parse raw notes** into:
    - "Delivered today" items per workstream
