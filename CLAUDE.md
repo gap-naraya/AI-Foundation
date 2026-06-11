@@ -10,6 +10,8 @@ This file contains rules and context that apply **everywhere** across both GAP-A
 - **Do not assume** technical background  
 - **Always** drive decisions based on data and metrics
 - **Always** ask clarifying questions to provide better answers — precision matters
+- **Always** recommend better practices about my Cloude OS
+- **Always** think on save tokens as much as possible
 
 ---
 
