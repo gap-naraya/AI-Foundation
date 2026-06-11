@@ -17,10 +17,20 @@ AI-Foundation/
 │   ├── Communication_Context.md
 │   └── Business_Context.md
 ├── helpers/                          Reusable tools (built once, used daily)
-│   └── eod-report.md
+│   ├── eod-report.md
+│   └── eod-report-quick-invoke.md
+├── .claude/                          Claude Code configuration
+│   ├── settings.local.json
+│   └── skills/                       Auto-triggering skills
+│       ├── eod-report/SKILL.md
+│       ├── escalate-gerardo/SKILL.md
+│       ├── draft-message/SKILL.md
+│       └── level3-portfolio/SKILL.md
 └── projects/                         Project-specific work and context
     ├── mediquant/
-    │   └── eod-report.context.md
+    │   ├── eod-report.context.md
+    │   ├── eod-report.previous.md
+    │   └── client-email-template.html
     └── ai_impact_evaluation/
         └── AI Impact Evaluation for MANAGERS.pdf
 ```
@@ -51,22 +61,45 @@ Each helper is a markdown file containing format definitions, voice rules, and a
 
 | Helper | Purpose | Status |
 |---|---|---|
-| `eod-report.md` | End-of-day project status report (Slack now; client email later) | v1 live (Slack only); v2 client email pending |
+| `eod-report.md` | End-of-day project status report — STANDARD (Slack) + CLIENT EMAIL (HTML) | v2 live |
+| `eod-report-quick-invoke.md` | Shortest possible invocation cheat sheet | Live |
+
+### `.claude/skills/` — Auto-triggering skills
+
+Skills load automatically when Claude detects a matching intent. No file references needed — just use the trigger phrase.
+
+| Skill | Trigger phrase(s) | What it does |
+|---|---|---|
+| `eod-report` | "eod", "end of day", "daily report", "status update" | Generates STANDARD + CLIENT EMAIL for Mediquant DOM. Dates for tomorrow automatically, sends to Slack + Gmail draft. |
+| `escalate-gerardo` | "escalate", "stuck", "blocked", "message to Gerardo" | Fills in one of 3 pre-approved escalation scripts (Unblock / Priority Check / Mentorship) and sends to Gerardo. |
+| `draft-message` | "draft a message to [name]", "write email to", "how do I tell [name]" | Drafts any work communication with auto-selected tone, language, and depth per audience matrix. |
+| `level3-portfolio` | "Level 3", "AI assessment", "certification", "portfolio", "evidence" | Audits Level 3 evidence, drafts GAP self-evaluation answers, maps daily work to the 5 rubric dimensions. |
 
 ### `projects/` — Project-specific work and context
 
 | Project | Contents | Notes |
 |---|---|---|
-| `mediquant/` | `eod-report.context.md` | Active client engagement (project codename DOM). Stakeholders, acronyms, workstream objectives. |
-| `ai_impact_evaluation/` | `AI Impact Evaluation for MANAGERS.pdf` | Level 3 AI certification rubric. Evidence portfolio rebuild pending. |
+| `mediquant/` | `eod-report.context.md`, `eod-report.previous.md`, `client-email-template.html` | Active client engagement (project codename DOM). Stakeholders, acronyms, workstream objectives, daily snapshot for slippage detection. |
+| `ai_impact_evaluation/` | `AI Impact Evaluation for MANAGERS.pdf` | Level 3 AI certification rubric. Evidence portfolio in progress via `level3-portfolio` skill. |
 
 ---
 
-## How to use helpers
+## How to use skills
 
-From any Claude Code conversation inside this directory, invoke a helper by referencing its files. Example for the End-of-Day report helper:
+Skills auto-trigger — just use a natural phrase. No file references needed.
 
-> Run my EoD report helper. Use format and voice rules from `helpers/eod-report.md` and project context from `projects/mediquant/eod-report.context.md`. Generate BOTH the standard and optimized versions side by side. My raw notes for today: [paste notes]. Yesterday's report for slippage detection: [paste yesterday's Slack].
+```
+eod                               → runs the EoD report helper
+escalate to Gerardo               → fills in the right escalation script
+draft a message to Shawn about X  → drafts a formal client message
+Level 3 evidence audit            → maps your work to the rubric
+```
+
+## How to use helpers (manual invocation)
+
+Helpers can still be invoked manually by referencing their files. Example:
+
+> Run my EoD report helper. Use format and voice rules from `helpers/eod-report.md` and project context from `projects/mediquant/eod-report.context.md`. Raw notes: [paste notes].
 
 Each helper file documents its own invocation pattern.
 
@@ -84,18 +117,18 @@ This stays on Nelson's machine and is **not part of this repo** (does not get pu
 
 ---
 
-## Status snapshot (as of 2026-06-07)
+## Status snapshot (as of 2026-06-11)
 
 **Done**
-- Personal context layer (the `context/` folder)
-- First helper (`eod-report.md`) — v1 live
-- First project context (`projects/mediquant/eod-report.context.md`)
-- Memory system primed with user profile, goals, stakeholders, and helper reference
+- Personal context layer (`context/` folder)
+- EoD report helper — v2 live (STANDARD + CLIENT EMAIL, HTML template, slippage detection)
+- Mediquant project context + previous snapshot system
+- Memory system primed with profile, goals, stakeholders, communication preferences, and helper references
+- 4 Claude Code skills: `eod-report`, `escalate-gerardo`, `draft-message`, `level3-portfolio`
 
 **In progress**
-- EoD helper v2 (client email derivative) — pending email examples
-- Level 3 AI certification evidence — rubric in place; portfolio rebuild pending
+- Level 3 AI certification evidence — rubric extracted, portfolio tracking via `level3-portfolio` skill
 
 **Upcoming (2026 goals)**
-- Mediquant project success — 3-month target
-- Level 3 AI certification — October target
+- Mediquant DOM project success — 3-month target
+- Level 3 AI certification — October target (re-evaluation windows: July, October)
