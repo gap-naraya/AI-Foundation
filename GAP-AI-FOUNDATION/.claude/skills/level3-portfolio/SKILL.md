@@ -27,7 +27,7 @@ Nelson's goal is to reach **Level 3 — AI Value Leader** on GAP's AI Impact Eva
 ## What Nelson already has (evidence map)
 
 ### Dimension 1 — Daily Workflow Integration ✅ Strong
-- EoD report helper (`helpers/eod-report.md`) — automated daily status reporting
+- EoD report helper (`/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/helpers/eod-report.md`) — automated daily status reporting
 - Client email generation from same notes
 - Slippage detection via previous snapshot system
 - Stakeholder communication drafter skill
@@ -45,7 +45,7 @@ Nelson's goal is to reach **Level 3 — AI Value Leader** on GAP's AI Impact Eva
 - **Action:** Start capturing time-saved metrics starting today
 
 ### Dimension 4 — AI Process Design ✅ Strong
-- Built this entire Claude OS (context files, helpers, project structure, skills, memory)
+- Built this entire Claude OS (context files at `GAP-AI-FOUNDATION/context/`, helpers, project structure, skills, memory)
 - EoD helper is a multi-step, multi-format automated workflow
 - Skills/agents architecture now in place
 - **Action:** Document the architecture as a reusable blueprint for other PMs at GAP
@@ -66,7 +66,7 @@ Nelson's goal is to reach **Level 3 — AI Value Leader** on GAP's AI Impact Eva
 "Does [X] count toward Level 3?" → Analyze a specific work output or activity and identify which dimension(s) it supports and how to document it.
 
 ### Mode 4: Portfolio update
-"Update my Level 3 portfolio" → Add a new evidence item from today's work to the running evidence log at `projects/ai_impact_evaluation/evidence-log.md` (create if it doesn't exist).
+"Update my Level 3 portfolio" → Add a new evidence item from today's work to the running evidence log at `/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/projects/ai_impact_evaluation/evidence-log.md` (create if it doesn't exist).
 
 ## Key dates
 - **July 2026**: Re-evaluation window (first checkpoint)
