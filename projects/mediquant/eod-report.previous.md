@@ -1,17 +1,17 @@
 # Previous EoD Report Snapshot
-**Last updated:** June 09, 2026
+**Last updated:** June 10, 2026
 
 ## Core Team Execution
 - **Progress:** 87% complete (21 of 24 tasks)
 - **Status:** AT RISK
-- **Key action date:** Jun 12 (Portal defects closure)
-- **Major blocker:** Databricks login configuration
+- **Key action date:** Jun 12 (Portal defects closure; MA training completion)
+- **Major blocker:** Databricks workspace login configuration (IT escalated)
 
 ## Compliance & Architecture Review
 - **Progress:** 86% complete (6 of 7 tasks)
 - **Status:** AT RISK
-- **Key action date:** Jun 10 (Proposal presentation to Jeff)
-- **Major blocker:** Formal proposal approval pending
+- **Key action date:** Jun 10 (Proposal presentation today; Ken/Dan validation sync)
+- **Major blocker:** Proposal approval pending (presentation happening today)
 
 ## Notes
 When you update this file after each EoD report:
