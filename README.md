@@ -1,134 +1,192 @@
-# AI-Foundation
+# AI-Foundation — Dual Operating Systems
 
-Nelson Araya's personal **Claude OS** — a collection of files, helpers, and project context that teach Claude how to work with Nelson across work, learning, and personal projects.
-
----
-
-## Repo map
-
-```
-AI-Foundation/
-├── CLAUDE.md                         Global Claude Code instructions
-├── README.md                         This file (table of contents)
-├── context/                          Who Nelson is
-│   ├── Personal_Constitution.md
-│   ├── 2026_Goals_Context.md
-│   ├── Career_Context_Document.md
-│   ├── Communication_Context.md
-│   └── Business_Context.md
-├── helpers/                          Reusable tools (built once, used daily)
-│   ├── eod-report.md
-│   └── eod-report-quick-invoke.md
-├── .claude/                          Claude Code configuration
-│   ├── settings.local.json
-│   └── skills/                       Auto-triggering skills
-│       ├── eod-report/SKILL.md
-│       ├── escalate-gerardo/SKILL.md
-│       ├── draft-message/SKILL.md
-│       └── level3-portfolio/SKILL.md
-└── projects/                         Project-specific work and context
-    ├── mediquant/
-    │   ├── eod-report.context.md
-    │   ├── eod-report.previous.md
-    │   └── client-email-template.html
-    └── ai_impact_evaluation/
-        └── AI Impact Evaluation for MANAGERS.pdf
-```
+Nelson Araya's **Claude OS** — a dual-project structure managing work at Growth Acceleration Partners (GAP/Mediquant) and teaching at Universidad Cenfotec, with shared foundational rules and isolated project contexts.
 
 ---
 
-## What's where
+## Architecture Overview
 
-### `CLAUDE.md` — Global instructions
+```
+AI-Foundation/                                    ← GitHub repo root
+├── CLAUDE.md                                    ← SHARED: hard rules + Nelson's identity
+├── README.md                                    ← This file
+├── GAP-AI-FOUNDATION/                           ← OS 1: Mediquant project
+│   ├── CLAUDE.md                                GAP-specific instructions
+│   ├── context/                                 Who Nelson is as a PM (5 files)
+│   ├── helpers/                                 Reusable EoD report tools
+│   ├── projects/
+│   │   ├── mediquant/                           Daily status, client email, snapshots
+│   │   └── ai_impact_evaluation/                Level 3 portfolio evidence
+│   └── .claude/skills/                          4 GAP-only skills
+│       ├── eod-report/
+│       ├── escalate-gerardo/
+│       ├── draft-message/
+│       └── level3-portfolio/
+└── CENFOTEC-AI-FOUNDATION/                      ← OS 2: Teaching (NEW)
+    ├── CLAUDE.md                                Teaching-specific instructions
+    ├── context/                                 Teaching context (4 stub files)
+    │   ├── courses.md                           Courses, subjects, levels
+    │   ├── student-communication.md             How to write feedback
+    │   ├── academic-calendar.md                 Semester dates, deadlines
+    │   └── institutional-context.md             Grading scale, policies
+    ├── courses/                                 Course rosters and rubrics
+    │   └── README.md                            Conventions and formats
+    ├── reviews/                                 Grade feedback files (created at runtime)
+    └── .claude/skills/                          2 Cenfotec-only skills (NEW)
+        ├── create-rubric/                       Generate rubrics
+        └── review-assignment/                   Grade with breakdown + feedback
+```
 
-Hard rules Claude follows in every conversation (no assumptions about technical background, data-driven decisions, always ask clarifying questions). Pointers to personal context files. Brief description of current operating context.
+---
 
-### `context/` — Who Nelson is
+## How It Works
 
-Five personal context files Claude loads to tailor its work to Nelson specifically.
+### File Loading Cascade
 
-| File | What it captures |
+When you open a project folder in Claude Code, it loads CLAUDE.md files in this order:
+
+**In GAP-AI-FOUNDATION:**
+1. `/Users/naraya/Documents/AI-Foundation/CLAUDE.md` (shared: hard rules + identity)
+2. `/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/CLAUDE.md` (GAP-specific context)
+
+**In CENFOTEC-AI-FOUNDATION:**
+1. `/Users/naraya/Documents/AI-Foundation/CLAUDE.md` (shared: hard rules + identity)
+2. `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/CLAUDE.md` (Cenfotec-specific context)
+
+**Result:** Hard rules and Nelson's identity apply everywhere. Domain-specific context loads only when relevant.
+
+### Skills Isolation
+
+- GAP skills (eod-report, escalate-gerardo, draft-message, level3-portfolio) **only activate in GAP-AI-FOUNDATION**
+- Cenfotec skills (create-rubric, review-assignment) **only activate in CENFOTEC-AI-FOUNDATION**
+- No skill bleeding between projects
+
+### Context-Switching in VS Code
+
+1. **To work on GAP/Mediquant**: Open `/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/` in VS Code
+2. **To work on Cenfotec/Teaching**: Open `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/` in VS Code
+
+Each folder is a separate project — only its skills and context are available.
+
+---
+
+## Shared Foundation (Root CLAUDE.md)
+
+The root `CLAUDE.md` contains:
+
+1. **Hard Rules** — apply everywhere
+   - Do not assume prior knowledge
+   - Drive decisions by data
+   - Ask clarifying questions
+
+2. **Nelson's Identity** — who he is (unchanged across domains)
+   - Core values: empathy, loyalty, presence, teamwork
+   - Operational principles: the Pause, courageous proactivity, the Black List
+   - Vision: reliable pillar of support for loved ones
+
+---
+
+## GAP-AI-FOUNDATION — Mediquant Project
+
+**Purpose:** Senior PM at GAP, managing critical Mediquant DOM automation project.
+
+**Context files:**
+- 2026 Goals Context
+- Career Context
+- Communication Style (audience matrix)
+- Business Context
+
+**Skills:**
+- `/eod` — Daily status report (Slack + client email)
+- `/escalate-gerardo` — Escalation to manager
+- `/draft-message` — Professional communication drafting
+- `/level3-portfolio` — AI maturity certification evidence
+
+**Projects:**
+- `projects/mediquant/` — daily reporting, client templates, snapshots
+- `projects/ai_impact_evaluation/` — Level 3 evidence log
+
+---
+
+## CENFOTEC-AI-FOUNDATION — Teaching (NEW)
+
+**Purpose:** University instructor at Cenfotec, designing and grading student assignments.
+
+**Context files (stubs — fill as needed):**
+- `courses.md` — list your courses, subjects, academic levels
+- `student-communication.md` — how you write feedback to students
+- `academic-calendar.md` — semester structure and deadlines
+- `institutional-context.md` — grading scale and policies
+
+**Skills:**
+- `/create-rubric` — generate assignment rubrics (conversational)
+- `/review-assignment` — grade student work with score breakdown + feedback
+
+**Workflow:**
+1. Create a rubric for an assignment → saved to `courses/[Course]/rubric-[Assignment].md`
+2. Create a roster file listing student groups → saved to `courses/[Course]/roster.md`
+3. Review a student/group submission → saved to `reviews/[Assignment]/feedback/[Name].md`
+
+**Output:**
+- Grade breakdown table (criterion → max points → lost → reason)
+- Final grade (e.g., 82/100)
+- Written feedback (strengths, areas to improve, next steps)
+
+---
+
+## Getting Started
+
+### If you're new to Cenfotec:
+
+1. Open `CENFOTEC-AI-FOUNDATION/` in VS Code
+2. Fill in the 4 context files with your teaching info
+3. Use `/create-rubric` to build your first rubric
+4. Use `/review-assignment` to grade student work
+
+### If you're working on GAP/Mediquant:
+
+1. Open `GAP-AI-FOUNDATION/` in VS Code
+2. All existing skills work as before (paths updated to new locations)
+3. Use `/eod` for daily status, `/draft-message` for communications, etc.
+
+---
+
+## Key Files & Paths
+
+| Need | Location |
 |---|---|
-| `Personal_Constitution.md` | Core values and operating principles |
-| `2026_Goals_Context.md` | Strategic goals for the year |
-| `Career_Context_Document.md` | Professional background and trajectory |
-| `Communication_Context.md` | Tone preferences by audience (formal vs casual) |
-| `Business_Context.md` | Work environment and decision-making style |
-
-### `helpers/` — Reusable tools
-
-Each helper is a markdown file containing format definitions, voice rules, and a "how to invoke" prompt. Built once, used repeatedly.
-
-| Helper | Purpose | Status |
-|---|---|---|
-| `eod-report.md` | End-of-day project status report — STANDARD (Slack) + CLIENT EMAIL (HTML) | v2 live |
-| `eod-report-quick-invoke.md` | Shortest possible invocation cheat sheet | Live |
-
-### `.claude/skills/` — Auto-triggering skills
-
-Skills load automatically when Claude detects a matching intent. No file references needed — just use the trigger phrase.
-
-| Skill | Trigger phrase(s) | What it does |
-|---|---|---|
-| `eod-report` | "eod", "end of day", "daily report", "status update" | Generates STANDARD + CLIENT EMAIL for Mediquant DOM. Dates for tomorrow automatically, sends to Slack + Gmail draft. |
-| `escalate-gerardo` | "escalate", "stuck", "blocked", "message to Gerardo" | Fills in one of 3 pre-approved escalation scripts (Unblock / Priority Check / Mentorship) and sends to Gerardo. |
-| `draft-message` | "draft a message to [name]", "write email to", "how do I tell [name]" | Drafts any work communication with auto-selected tone, language, and depth per audience matrix. |
-| `level3-portfolio` | "Level 3", "AI assessment", "certification", "portfolio", "evidence" | Audits Level 3 evidence, drafts GAP self-evaluation answers, maps daily work to the 5 rubric dimensions. |
-
-### `projects/` — Project-specific work and context
-
-| Project | Contents | Notes |
-|---|---|---|
-| `mediquant/` | `eod-report.context.md`, `eod-report.previous.md`, `client-email-template.html` | Active client engagement (project codename DOM). Stakeholders, acronyms, workstream objectives, daily snapshot for slippage detection. |
-| `ai_impact_evaluation/` | `AI Impact Evaluation for MANAGERS.pdf` | Level 3 AI certification rubric. Evidence portfolio in progress via `level3-portfolio` skill. |
+| Shared rules & identity | `/Users/naraya/Documents/AI-Foundation/CLAUDE.md` |
+| GAP project context | `/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/CLAUDE.md` |
+| Cenfotec teaching context | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/CLAUDE.md` |
+| My courses info | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/context/courses.md` |
+| My feedback style | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/context/student-communication.md` |
+| Student rosters | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/roster.md` |
+| Assignment rubrics | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/rubric-[Assignment].md` |
+| Student feedback | `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[Assignment]/feedback/[Name].md` |
 
 ---
 
-## How to use skills
+## GitHub & Version Control
 
-Skills auto-trigger — just use a natural phrase. No file references needed.
-
-```
-eod                               → runs the EoD report helper
-escalate to Gerardo               → fills in the right escalation script
-draft a message to Shawn about X  → drafts a formal client message
-Level 3 evidence audit            → maps your work to the rubric
-```
-
-## How to use helpers (manual invocation)
-
-Helpers can still be invoked manually by referencing their files. Example:
-
-> Run my EoD report helper. Use format and voice rules from `helpers/eod-report.md` and project context from `projects/mediquant/eod-report.context.md`. Raw notes: [paste notes].
-
-Each helper file documents its own invocation pattern.
+- **Single repo**: `AI-Foundation/` on GitHub
+- **Two isolated projects**: GAP-AI-FOUNDATION/ and CENFOTEC-AI-FOUNDATION/
+- All changes tracked together; can view history per project
 
 ---
 
-## Memory (lives outside this repo)
+## Updates & Maintenance
 
-Claude's persistent memory across conversations lives at:
-
-```
-~/.claude/projects/-Users-naraya-Documents-AI-Foundation/memory/
-```
-
-This stays on Nelson's machine and is **not part of this repo** (does not get pushed to GitHub). The `MEMORY.md` index there links to individual memory files: Nelson's profile, core values, 2026 goals, stakeholders, communication preferences, business context, and references to helpers built so far.
+- **Root CLAUDE.md**: Update when your core values, hard rules, or identity changes (rarely)
+- **Project CLAUDE.md**: Update when project context shifts (e.g., new stakeholders, new goals)
+- **Context files**: Update as your courses, calendar, or communication style evolves
+- **Skills**: Create new skills as you build new tools (e.g., a grading template, rubric builder)
 
 ---
 
-## Status snapshot (as of 2026-06-11)
+## Questions?
 
-**Done**
-- Personal context layer (`context/` folder)
-- EoD report helper — v2 live (STANDARD + CLIENT EMAIL, HTML template, slippage detection)
-- Mediquant project context + previous snapshot system
-- Memory system primed with profile, goals, stakeholders, communication preferences, and helper references
-- 4 Claude Code skills: `eod-report`, `escalate-gerardo`, `draft-message`, `level3-portfolio`
-
-**In progress**
-- Level 3 AI certification evidence — rubric extracted, portfolio tracking via `level3-portfolio` skill
-
-**Upcoming (2026 goals)**
-- Mediquant DOM project success — 3-month target
-- Level 3 AI certification — October target (re-evaluation windows: July, October)
+- **How do I add a new Cenfotec course?** → Edit `context/courses.md` and create a `courses/[Course-Name]/` folder with `roster.md` and rubrics
+- **How do I switch between projects?** → Close one VS Code window, open the other project folder
+- **How do I update my feedback style?** → Edit `CENFOTEC-AI-FOUNDATION/context/student-communication.md`
+- **How do I create a rubric?** → Say "create rubric for [Assignment Name]" in CENFOTEC-AI-FOUNDATION context
+- **How do I grade student work?** → Say "review [Student Name]'s assignment" or "grade Group A" (file path required)
