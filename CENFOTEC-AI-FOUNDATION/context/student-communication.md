@@ -6,9 +6,9 @@ Define how Nelson prefers to communicate with students through feedback and grad
 
 ## Language & Tone
 
-**Primary language**: Spanish / English (choose one or specify per course)  
-**Formal level**: Formal / Professional / Casual (choose one)  
-**Tone preference**: 
+**Primary language**: Spanish
+**Formal level**: Formal
+**Tone preference**: Professional
 
 Describe the tone Nelson uses with students. For example:
 - Encouraging and supportive (emphasize growth)
@@ -22,11 +22,10 @@ Describe the tone Nelson uses with students. For example:
 How should Claude structure written feedback for students?
 
 **Example structures:**
-- Strengths first, then areas for improvement
-- What they did well, what to work on next time, specific actionable tips
-- Compliment sandwich (good, gap, encouragement)
-
-**Nelson's preference**:
+- Always start with this messgae: "Muchísimas gracias por el trabajo realizado!"
+- If grade is 100. Add the following sentence: "Excelente trabajo! Los felicito!!"
+- If grade has annotations. Add the following sentence: "A continuacion algunas acotaciones: "
+- Each annotation should be an item in a bullet list
 
 ---
 
@@ -35,16 +34,12 @@ How should Claude structure written feedback for students?
 List communication patterns Nelson wants Claude to avoid in feedback:
 
 Examples:
-- Generic praise ("good job") without specifics
 - Negative framing ("you didn't...")
 - Tone that feels punitive or condescending
 - Too much detail (keep feedback concise)
-
-**Nelson's preferences**:
 
 ---
 
 ## Special Notes
 
-Any other communication guidelines for student work:
-
+Always respect the evaluation's rubric to evaluate and grade the assessments 

@@ -4,24 +4,24 @@ Complete this file with information about the courses Nelson teaches at Universi
 
 ---
 
-## Course 1: [Course Name]
+## Course 1: Proyecto de Ingeniería del Software 3 
 
-**Course Code**: [e.g., CS-101]  
-**Academic Level**: [e.g., Introductory, Intermediate, Advanced]  
-**Subject**: [e.g., Software Development, Data Analysis]  
-**Number of students**: [approximately]  
-**Typical assignment types**: Essays / Presentations / Code Projects / Quizzes  
-**Notes**: 
+**Course Code**: BISOFT-22  
+**Academic Level**: Bachelor in Software Engineering  
+**Subject**: Software Development Life Cycle
+**Number of students**: Between 25 - 30
+**Typical assignment types**: Documents  
+**Notes**: My participations are totally focused on Project Managament content
 
 ---
 
-## Course 2: [Course Name]
+## Course 2: Ingeniería de Requerimientos
 
-**Course Code**: [e.g., CS-102]  
-**Academic Level**: [e.g., Introductory, Intermediate, Advanced]  
-**Subject**: [e.g., Software Development, Data Analysis]  
-**Number of students**: [approximately]  
-**Typical assignment types**: Essays / Presentations / Code Projects / Quizzes  
+**Course Code**: BISOFT-28   
+**Academic Level**: Bachelor in Software Engineering  
+**Subject**: Requirements Engineering in Software Developement  
+**Number of students**: Between 15 - 20  
+**Typical assignment types**: Documents  
 **Notes**: 
 
 ---
