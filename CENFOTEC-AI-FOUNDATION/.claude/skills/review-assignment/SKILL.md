@@ -9,26 +9,13 @@ When triggered, read a student or group submission, apply the rubric (if one exi
 
 ---
 
-## Step 1 — Determine the Mode
-
-Ask Nelson (or infer from context):
-
-| Mode | Trigger | What it means |
-|---|---|---|
-| **Group** | "grade Group A", "review Group assignment", "evaluate [GroupName]" | One file for a whole group → all members get same grade |
-| **Individual** | "review [StudentName]'s assignment", "grade [name]", "individual feedback" | One file for one student → personalized grade and feedback |
-
-If ambiguous (e.g., "cenfotec review", "grade assignment"), ask: **"Is this for a group or an individual student?"**
-
----
-
-## Step 2 — Gather Information
+## Step 1 — Gather Information
 
 Ask Nelson for:
 
 1. **File path** — where is the submission PDF/Word file?
-2. **Group or student name** — who submitted this? (for group mode: "Group A"; for individual: "Maria Garcia")
-3. **Course name** — which course is this for? (so Claude can find the roster if it's a group)
+2. **Subject name** — who submitted this? (group name like "Group A" or student name like "Maria Garcia")
+3. **Course name** — which course is this for?
 4. **Assignment name** — what's the assignment called? (so Claude can find the rubric)
 
 ---
@@ -38,34 +25,22 @@ Ask Nelson for:
 Load:
 - **Submission file** (PDF or Word) → extract and read the full content
 - **Rubric** (if exists) → load from `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/rubric-[Assignment-Name].md`
-- **Roster** (group mode only) → load from `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/roster.md` to confirm member names
 
 If no rubric exists, proceed with holistic evaluation (0–100 scale with disclaimer).
 
 ---
 
-## Step 4A — Group Mode: Read Roster and Evaluate
+## Step 4 — Evaluate the Submission
 
-1. Find the group in the roster
-2. Extract all member names
-3. Read and evaluate the submission against the rubric (or holistically if no rubric)
-4. Calculate grade breakdown (see format below)
-5. **All members receive the same grade**
-
----
-
-## Step 4B — Individual Mode: Evaluate
-
-1. Read the submission
-2. Evaluate against the rubric (or holistically if no rubric)
-3. Calculate grade breakdown
-4. Personalize feedback for this student
+1. Evaluate the submission against the rubric (or holistically if no rubric)
+2. Calculate grade breakdown (see format below)
+3. Write personalized feedback for the subject
 
 ---
 
 ## Step 5 — Create Grade Breakdown Table
 
-For **both modes**, produce a table showing:
+Produce a table showing:
 - **Criterion name**
 - **Max points**
 - **Points lost** (as negative, e.g., -5)
@@ -122,14 +97,8 @@ After the grade breakdown table, write **2–3 paragraphs of personalized feedba
 
 ## Step 7 — Save the Feedback File
 
-**Group mode:**
 ```
-/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[Assignment-Name]/feedback/[GroupName].md
-```
-
-**Individual mode:**
-```
-/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[Assignment-Name]/feedback/[StudentName].md
+/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[Assignment-Name]/feedback/[SubjectName].md
 ```
 
 Create the `reviews/[Assignment-Name]/feedback/` folder if it doesn't exist.
@@ -141,30 +110,7 @@ Create the `reviews/[Assignment-Name]/feedback/` folder if it doesn't exist.
 **Feedback file structure:**
 
 ```markdown
-# [Assignment Name] — [Group Name / Student Name]
-
-## Members (Group mode only)
-- María García
-- Carlos Rodríguez
-- Ana López
-
-## Grade Breakdown
-
-| Criterion | Max | Lost | Earned | Notes |
-|-----------|-----|------|--------|-------|
-| ... |
-
-## Final Grade: **82 / 100**
-
-### Feedback
-
-[Your feedback paragraphs here]
-```
-
-**Individual student:**
-
-```markdown
-# [Assignment Name] — [Student Name]
+# [Assignment Name] — [Subject Name]
 
 ## Grade Breakdown
 
@@ -186,7 +132,7 @@ Create the `reviews/[Assignment-Name]/feedback/` folder if it doesn't exist.
 Once saved, report:
 
 ```
-✓ Feedback saved to: reviews/[Assignment]/feedback/[Name].md
+✓ Feedback saved to: reviews/[Assignment]/feedback/[SubjectName].md
   Grade: 82/100
   Status: Ready for Nelson to review / send to student
 ```
@@ -211,12 +157,6 @@ If no rubric exists, proceed with holistic evaluation:
 If Nelson provides an invalid file path:
 - Ask for the correct path
 - Do not proceed without a readable file
-
-### Group Member Not in Roster
-
-If Nelson says "Grade Group X" but Group X doesn't exist in the roster:
-- Ask Nelson to confirm the group name or provide the member list
-- Update or create the roster entry before grading
 
 ---
 
