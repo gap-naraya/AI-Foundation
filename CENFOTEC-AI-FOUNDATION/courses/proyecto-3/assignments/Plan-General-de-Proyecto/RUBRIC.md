@@ -1,6 +1,6 @@
-# Plan General de Proyecto — Rubric
+# Plan General de Proyecto — Rúbrica
 
-Total Points: 100
+Total de Puntos: 100
 
 | Criterio | Puntos Máx. | Descripción |
 |---|---|---|
