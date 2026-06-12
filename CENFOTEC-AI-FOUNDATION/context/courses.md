@@ -6,6 +6,7 @@ Complete this file with information about the courses Nelson teaches at Universi
 
 ## Course 1: Proyecto de Ingeniería del Software 3 
 
+**Folder Name**: proyecto-3
 **Course Code**: BISOFT-22  
 **Academic Level**: Bachelor in Software Engineering  
 **Subject**: Software Development Life Cycle
@@ -17,6 +18,7 @@ Complete this file with information about the courses Nelson teaches at Universi
 
 ## Course 2: Ingeniería de Requerimientos
 
+**Folder Name**: ingenieria-requerimientos 
 **Course Code**: BISOFT-28   
 **Academic Level**: Bachelor in Software Engineering  
 **Subject**: Requirements Engineering in Software Developement  
