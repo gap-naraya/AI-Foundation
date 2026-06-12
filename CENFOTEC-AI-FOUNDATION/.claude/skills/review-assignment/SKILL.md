@@ -24,7 +24,7 @@ Ask Nelson for:
 
 Load:
 - **Submission file** (PDF or Word) → extract and read the full content
-- **Rubric** (if exists) → load from `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/rubric-[Assignment-Name].md`
+- **Rubric** (if exists) → load from `/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/assignments/[Assignment-Name]/RUBRIC.md`
 
 If no rubric exists, proceed with holistic evaluation (0–100 scale with disclaimer).
 

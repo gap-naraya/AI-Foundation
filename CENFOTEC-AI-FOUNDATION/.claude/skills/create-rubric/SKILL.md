@@ -63,10 +63,10 @@ Nelson can say things like:
 Once Nelson approves, save to:
 
 ```
-/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/rubric-[Assignment-Name].md
+/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[Course-Name]/assignments/[Assignment-Name]/RUBRIC.md
 ```
 
-Create the course subfolder if it doesn't exist.
+Create the `courses/[Course-Name]/assignments/[Assignment-Name]/` folder if it doesn't exist.
 
 **File format:**
 

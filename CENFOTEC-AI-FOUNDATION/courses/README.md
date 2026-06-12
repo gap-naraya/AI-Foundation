@@ -11,7 +11,12 @@ For each course, create a subfolder with:
 ```
 courses/
 ├── [Course-Name]/
-│   ├── rubric-[assignment].md  ← Rubric for each assignment (created by create-rubric skill)
+│   ├── assignments/
+│   │   ├── [Assignment-Name]/
+│   │   │   ├── INSTRUCTIONS.md  ← Assignment requirements
+│   │   │   ├── RUBRIC.md        ← Rubric (created by create-rubric skill)
+│   │   │   └── README.md        ← Overview
+│   │   └── ...
 │   └── ...
 ```
 
@@ -82,7 +87,8 @@ The `review-assignment` skill will:
 
 1. **Create rubric**: "create rubric for Final Essay, 100 points"
    - Optionally provide the assignment instructions document
-   - Saves to: `courses/Software-Dev-101/rubric-Final-Essay.md`
+   - Saves to: `courses/Software-Dev-101/assignments/Final-Essay/RUBRIC.md`
+   - Also create assignment folder with `INSTRUCTIONS.md` and `README.md`
 
 2. **Grade submissions** (same workflow for groups or individuals):
    
