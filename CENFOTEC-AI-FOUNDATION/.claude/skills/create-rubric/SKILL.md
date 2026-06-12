@@ -16,12 +16,26 @@ Ask Nelson for:
 2. **Assignment type** (e.g., Essay, Presentation, Code project, Mixed)
 3. **Total points** (default: 100; allows custom)
 4. **Course name** (to know where to save the rubric)
+5. **Assignment instructions file** (optional — path to PDF or Word doc with the assignment description)
 
 ---
 
-## Step 2 — Propose a Rubric
+## Step 2 — Read the Assignment Instructions (if provided)
 
-Based on the assignment type, propose a rubric with **4–6 criteria**.
+If Nelson provided an assignment instructions file:
+1. Read and extract the full content
+2. Identify key requirements and learning objectives
+3. Note any specific evaluation criteria mentioned in the instructions
+
+If no file was provided, skip to Step 3.
+
+---
+
+## Step 3 — Propose a Rubric
+
+Based on the assignment type and instructions (if available), propose a rubric with a balanced number of criteria based on the amount of work needed.
+
+If instructions were provided, ground the criteria in the actual requirements described. If not, use a generic template for the assignment type.
 
 ### Structure
 
@@ -30,38 +44,7 @@ Each criterion must have:
 - **Max Points** (the maximum for this criterion)
 - **Description** (what excellence looks like)
 
-### Examples by Assignment Type
-
-**Essay Rubric** (100 points):
-| Criterion | Max Points | Description |
-|-----------|------------|-------------|
-| Content depth | 30 | Coverage, accuracy, and analysis of key concepts |
-| Structure | 20 | Organization, logical flow, coherent argument |
-| Sources/Evidence | 20 | Use of credible references, proper citations |
-| Writing quality | 15 | Grammar, clarity, professional tone |
-| Conclusions | 15 | Strength of analysis and takeaways |
-
-**Presentation Rubric** (100 points):
-| Criterion | Max Points | Description |
-|-----------|------------|-------------|
-| Content accuracy | 25 | Information is correct and relevant |
-| Organization | 20 | Logical flow, clear structure |
-| Visual design | 20 | Engaging slides, professional appearance |
-| Delivery | 20 | Clarity, pacing, eye contact, confidence |
-| Q&A handling | 15 | Answers questions confidently and thoroughly |
-
-**Code Project Rubric** (100 points):
-| Criterion | Max Points | Description |
-|-----------|------------|-------------|
-| Functionality | 30 | Code runs, meets requirements |
-| Code quality | 25 | Clean, readable, well-commented |
-| Testing | 20 | Adequate test coverage, edge cases handled |
-| Documentation | 15 | README, comments, usage instructions |
-| Creativity/extras | 10 | Bonus features, optimization, user experience |
-
----
-
-## Step 3 — Iterate with Nelson
+## Step 4 — Iterate with Nelson
 
 After proposing the rubric, ask: **"Any adjustments?"**
 
@@ -75,7 +58,7 @@ Nelson can say things like:
 
 ---
 
-## Step 4 — Save the Rubric
+## Step 5 — Save the Rubric
 
 Once Nelson approves, save to:
 
@@ -100,7 +83,7 @@ Total Points: 100
 
 ---
 
-## Step 5 — Confirm & Close
+## Step 6 — Confirm & Close
 
 Report:
 - **Path**: where the rubric was saved
