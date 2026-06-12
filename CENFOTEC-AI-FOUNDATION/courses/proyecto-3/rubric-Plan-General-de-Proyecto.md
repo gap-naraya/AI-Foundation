@@ -1,0 +1,12 @@
+# Plan General de Proyecto — Rubric
+
+Total Points: 100
+
+| Criterion | Max Points | Description |
+|---|---|---|
+| **Documento y Estructura** | 10 | Cover includes all required elements (university logo, team/product information, document title, course, professors, delivery date, academic period). All major sections are present and logically organized. Table of contents matches document structure. Clear explanations throughout with proper APA citations. |
+| **Plan de Calidad** | 20 | Quality management strategy clearly defined with control procedures: verification checklists (with proper table format), test case design and hierarchy (Test Case → Test Cycle → Test Plan), unit testing strategy with tools specified, performance testing design with tool justification. Definition of Done (DoD) as team checklist is included. Content is well-organized and clearly explained. |
+| **Plan de Riesgos** | 20 | Comprehensive risk identification across all areas (development, product, configuration, quality). Includes all required analysis tables: risk descriptions, impact levels with ranges, probability levels with ranges, probability-impact matrix for prioritization. Mitigation and contingency plans for all non-low-priority risks. Tables are clear and well-documented. |
+| **Plan de Configuración** | 10 | Configuration control process is clearly defined: tools described, person responsible identified, document and software versioning strategy explained, number of environments specified, backup procedures included. Repository structure and flow (branching strategy) explained. Repository rules defined for developers. Content is clear and organized. |
+| **Plan de Estándares** | 20 | Detailed standards across all areas: UI standards (color palette, control nomenclature, component examples: buttons, textboxes, dropdowns, tables, etc.), coding standards (naming conventions for code and databases), documentation standards (Java Doc mandatory), database standards. Standards are specific and applicable throughout the project. Content is well-organized and clearly explained. |
+| **Plan de Gestión del Tiempo** | 20 | WBS (Work Breakdown Structure) included and explained with clear delineation of documents, modules, and user stories. Network diagram showing precedence of user stories included. Project management tool selected and justified. Workflow for each user story defined. Meeting minutes, task management, and project administration tools specified. Content is well-organized and clearly explained. |
