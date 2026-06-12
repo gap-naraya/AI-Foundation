@@ -11,36 +11,9 @@ For each course, create a subfolder with:
 ```
 courses/
 ├── [Course-Name]/
-│   ├── roster.md           ← Student groups (which students work together)
 │   ├── rubric-[assignment].md  ← Rubric for each assignment (created by create-rubric skill)
 │   └── ...
 ```
-
----
-
-## roster.md Format (Optional Reference)
-
-Optionally create a roster file to document group composition for your own reference. The `review-assignment` skill does not require it — you can grade by group name or student name directly.
-
-**Example:**
-
-```markdown
-# Course: Software Development 101
-
-## Group A
-- María García
-- Carlos Rodríguez
-- Ana López
-
-## Group B
-- José Martínez
-- Laura Sánchez
-
-## Individual Students (no group)
-- Pedro Jiménez
-```
-
-**Tip:** Keep group names consistent when grading so feedback files are organized predictably.
 
 ---
 
