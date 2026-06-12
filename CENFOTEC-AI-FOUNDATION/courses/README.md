@@ -18,9 +18,9 @@ courses/
 
 ---
 
-## roster.md Format
+## roster.md Format (Optional Reference)
 
-Create a roster file to define which students belong to which group. This is used by the `review-assignment` skill to assign grades to the correct students.
+Optionally create a roster file to document group composition for your own reference. The `review-assignment` skill does not require it — you can grade by group name or student name directly.
 
 **Example:**
 
@@ -40,7 +40,7 @@ Create a roster file to define which students belong to which group. This is use
 - Pedro Jiménez
 ```
 
-**Important:** Keep group names consistent when you reference them in feedback files.
+**Tip:** Keep group names consistent when grading so feedback files are organized predictably.
 
 ---
 
@@ -73,27 +73,31 @@ Each criterion must have:
 
 Say: **"create rubric for [Assignment Name]"**
 
+Optionally provide the assignment instructions document (PDF or Word) so the rubric is grounded in the actual assignment requirements.
+
 The `create-rubric` skill will:
 1. Ask for assignment type (essay, presentation, etc.) and total points
-2. Propose a 4–6 criterion rubric
-3. Let you adjust criteria and point values
-4. Save to `courses/[Course-Name]/rubric-[Assignment-Name].md`
+2. If you provided instructions, read them and extract key requirements
+3. Propose a 4–6 criterion rubric (grounded in actual requirements, or generic if no instructions)
+4. Let you adjust criteria and point values
+5. Save to `courses/[Course-Name]/rubric-[Assignment-Name].md`
 
 ---
 
 ## Using a Rubric for Grading
 
-Say: **"grade Group A"** or **"review [StudentName]'s assignment"**
+Say: **"grade [Group Name]"** or **"review [StudentName]'s assignment"**
 
 Provide:
 - File path to the submission (PDF or Word document)
-- Group name OR student name
-- Course name (so Claude can find the roster if needed)
+- Subject name (group name or student name)
+- Course name
 
 The `review-assignment` skill will:
 1. Read the submission file
 2. Load the rubric (if it exists)
-3. Produce a grade breakdown with:
+3. Evaluate against the rubric (or holistically if none exists)
+4. Produce a grade breakdown with:
    - Points earned per criterion
    - Points lost (with reason)
    - Final grade
@@ -104,15 +108,19 @@ The `review-assignment` skill will:
 ## Example Workflow
 
 1. **Create rubric**: "create rubric for Final Essay, 100 points"
+   - Optionally provide the assignment instructions document
    - Saves to: `courses/Software-Dev-101/rubric-Final-Essay.md`
 
-2. **Create roster** (if not done yet):
-   - Save manually to: `courses/Software-Dev-101/roster.md`
-
-3. **Grade Group A**: "grade Group A's essay submission" + provide file path
-   - Saves feedback to: `reviews/Final-Essay/feedback/GroupA.md`
-   - Includes: member list, grade breakdown, final grade, feedback
-
-4. **Grade individual student**: "review Maria's essay" + provide file path
+2. **Grade submissions** (same workflow for groups or individuals):
+   
+   **Group submission:**
+   - Say: "grade Group A's essay submission" + provide file path
+   - Saves feedback to: `reviews/Final-Essay/feedback/Group-A.md`
+   - Includes: grade breakdown, final grade, feedback
+   
+   **Individual submission:**
+   - Say: "review Maria's essay" + provide file path
    - Saves feedback to: `reviews/Final-Essay/feedback/Maria.md`
    - Includes: grade breakdown, final grade, personalized feedback
+
+Both use the same evaluation process — the only difference is the subject name.
