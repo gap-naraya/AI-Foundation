@@ -9,14 +9,120 @@ When triggered, read a student or group submission, apply the rubric (if one exi
 
 ---
 
-## Step 1 — Gather Information
+## Step 1 — Auto-Discover Courses, Assignments & Submissions
 
-Ask Nelson for:
+This step auto-discovers available courses, assignments, and submission files, then asks for only the subject name.
 
-1. **File path** — where is the submission PDF/Word file?
-2. **Subject name** — who submitted this? (group name like "Group A" or student name like "Maria Garcia")
-3. **Course name** — which course is this for?
-4. **Assignment name** — what's the assignment called? (so Claude can find the rubric)
+### Step 1a — Discover and Select Course
+
+Run:
+```bash
+find /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses \
+  -mindepth 1 -maxdepth 1 -type d ! -name ".gitkeep"
+```
+
+Parse the output into course folder names. Present as a numbered list:
+
+```
+Which course is this for?
+1. ingenieria-requerimientos
+2. proyecto-3
+```
+
+If 0 results → error: "No courses found under courses/. Check the folder structure."
+
+Store the selected course as: `COURSE`
+
+---
+
+### Step 1b — Discover and Select Assignment
+
+Run:
+```bash
+find /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/courses/[COURSE]/assignments \
+  -mindepth 1 -maxdepth 1 -type d
+```
+
+Parse the output into assignment folder names. Present as a numbered list:
+
+```
+Which assignment?
+1. plan-general-de-proyecto
+```
+
+If 0 results → error: "No assignments found for [COURSE]. Create a folder under courses/[COURSE]/assignments/."
+
+If 1 result → auto-select it and confirm with Nelson.
+
+Store the selected assignment as: `ASSIGNMENT`
+
+---
+
+### Step 1c — Discover and Select Submission File
+
+Run:
+```bash
+find /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT] \
+  -maxdepth 1 -type f \( -iname "*.pdf" -o -iname "*.docx" -o -iname "*.doc" \)
+```
+
+**If the submissions/[ASSIGNMENT] folder does not exist or is empty:**
+
+```
+No submission files found for [ASSIGNMENT].
+
+Create the folder and drop your submission files:
+  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT]/
+
+Then run the skill again.
+```
+
+Stop and wait for Nelson to create the folder and drop files in it.
+
+**If 1+ files exist:**
+
+Present as a numbered list:
+
+```
+Which submission file?
+1. Grupo-A.pdf
+2. Grupo-B.pdf
+```
+
+If 1 file → auto-select it and confirm.
+
+Store the full path to the selected file as: `SUBMISSION_FILE`
+
+---
+
+### Step 1d — Ask for Subject Name (Manual Input Only)
+
+Ask Nelson:
+```
+¿Cuál es el nombre del sujeto? (ej: Grupo A, María García)
+```
+
+Store as: `SUBJECT_NAME`
+
+---
+
+### Step 1e — Confirmation Summary
+
+Before proceeding to grading, display a summary for Nelson to confirm:
+
+```
+=== Confirmación ===
+Curso:      [COURSE]
+Entregable: [ASSIGNMENT]
+Archivo:    [SUBMISSION_FILE]
+Sujeto:     [SUBJECT_NAME]
+
+¿Procedemos? (sí / no)
+```
+
+If Nelson says "no" → stop and ask him to re-run the skill.
+
+If Nelson says "sí" → proceed to Step 3.
 
 ---
 
@@ -98,10 +204,10 @@ After the grade breakdown table, write **2–3 paragraphs of personalized feedba
 ## Step 7 — Save the Feedback File
 
 ```
-/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[Assignment-Name]/feedback/[SubjectName].md
+/Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/reviews/[COURSE]/[ASSIGNMENT]/feedback/[SubjectName].md
 ```
 
-Create the `reviews/[Assignment-Name]/feedback/` folder if it doesn't exist.
+Create the `reviews/[COURSE]/[ASSIGNMENT]/feedback/` folder if it doesn't exist.
 
 ---
 
@@ -132,7 +238,7 @@ Create the `reviews/[Assignment-Name]/feedback/` folder if it doesn't exist.
 Once saved, report:
 
 ```
-✓ Feedback saved to: reviews/[Assignment]/feedback/[SubjectName].md
+✓ Feedback saved to: reviews/[COURSE]/[ASSIGNMENT]/feedback/[SubjectName].md
   Grade: 82/100
   Status: Ready for Nelson to review / send to student
 ```
@@ -141,9 +247,31 @@ Once saved, report:
 
 ## Special Cases
 
+### Submissions Folder Missing or Empty
+
+If the `submissions/[ASSIGNMENT]/` folder does not exist or contains no PDF/docx files, the skill will display:
+
+```
+No submission files found for [ASSIGNMENT].
+
+Create the folder and drop your submission files:
+  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT]/
+
+Then run the skill again.
+```
+
+**How to use:**
+1. Create the folder: `submissions/[assignment-slug]/` (use the same slug as the assignment folder name)
+2. Drop all submission PDF or Word files into it (one per student/group)
+3. Run the skill again — it will now list the files
+
+File names become the default subject name (e.g., `Grupo-A.pdf` → subject: "Grupo A"). Nelson can confirm or change this in Step 1d.
+
+---
+
 ### No Rubric Available
 
-If no rubric exists, proceed with holistic evaluation:
+If no rubric exists for the selected assignment, proceed with holistic evaluation:
 1. Read the submission carefully
 2. Evaluate against the assignment description (what was asked)
 3. Score 0–100 based on:
@@ -152,10 +280,13 @@ If no rubric exists, proceed with holistic evaluation:
    - How complete is it?
 4. **Include a note:** "Evaluated holistically (no rubric). Consider creating a rubric for consistency."
 
-### Missing File
+---
 
-If Nelson provides an invalid file path:
-- Ask for the correct path
+### Invalid File Selection
+
+If the selected file is unreadable or corrupted:
+- Ask Nelson to check the file
+- Offer to select a different file from the submissions/ folder
 - Do not proceed without a readable file
 
 ---
