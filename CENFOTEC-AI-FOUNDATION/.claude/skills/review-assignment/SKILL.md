@@ -62,17 +62,17 @@ Store the selected assignment as: `ASSIGNMENT`
 
 Run:
 ```bash
-find /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT] \
+find /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[COURSE]/[ASSIGNMENT] \
   -maxdepth 1 -type f \( -iname "*.pdf" -o -iname "*.docx" -o -iname "*.doc" \)
 ```
 
-**If the submissions/[ASSIGNMENT] folder does not exist or is empty:**
+**If the submissions/[COURSE]/[ASSIGNMENT] folder does not exist or is empty:**
 
 ```
 No submission files found for [ASSIGNMENT].
 
 Create the folder and drop your submission files:
-  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT]/
+  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[COURSE]/[ASSIGNMENT]/
 
 Then run the skill again.
 ```
@@ -249,23 +249,34 @@ Once saved, report:
 
 ### Submissions Folder Missing or Empty
 
-If the `submissions/[ASSIGNMENT]/` folder does not exist or contains no PDF/docx files, the skill will display:
+If the `submissions/[COURSE]/[ASSIGNMENT]/` folder does not exist or contains no PDF/docx files, the skill will display:
 
 ```
 No submission files found for [ASSIGNMENT].
 
 Create the folder and drop your submission files:
-  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[ASSIGNMENT]/
+  /Users/naraya/Documents/AI-Foundation/CENFOTEC-AI-FOUNDATION/submissions/[COURSE]/[ASSIGNMENT]/
 
 Then run the skill again.
 ```
 
 **How to use:**
-1. Create the folder: `submissions/[assignment-slug]/` (use the same slug as the assignment folder name)
+1. Create the folder structure: `submissions/[course-slug]/[assignment-slug]/` (matching the course and assignment folder names)
 2. Drop all submission PDF or Word files into it (one per student/group)
 3. Run the skill again — it will now list the files
 
 File names become the default subject name (e.g., `Grupo-A.pdf` → subject: "Grupo A"). Nelson can confirm or change this in Step 1d.
+
+**Example folder structure:**
+```
+submissions/
+├── proyecto-3/
+│   ├── plan-general-de-proyecto/
+│   │   ├── Grupo-A.pdf
+│   │   └── Grupo-B.pdf
+└── ingenieria-requerimientos/
+    └── [future assignments]
+```
 
 ---
 
