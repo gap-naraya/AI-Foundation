@@ -1,17 +1,17 @@
 # Previous EoD Report Snapshot
-**Last updated:** June 11, 2026
+**Last updated:** June 14, 2026
 
 ## Core Team Execution
-- **Progress:** 87% complete (21 of 24 tasks)
-- **Status:** AT RISK
-- **Key action date:** Jun 12 (Portal defects closure; security training completion)
-- **Major blocker:** Databricks workspace login configuration (escalated to MQ IT)
+- **Progress:** 92% complete (22 of 24 tasks)
+- **Status:** ON TRACK
+- **Key action date:** Today (Fresh test run validation; Roberto's work migration to Azure DevOps)
+- **Major blocker:** Test run results pending; infrastructure tracking pending Azure DevOps migration
 
 ## Compliance & Architecture Review
-- **Progress:** 100% complete (7 of 7 tasks)
+- **Progress:** Remediation phase: 10 of 13 user stories targeted by Jun 19 (76.2% policy compliance baseline)
 - **Status:** ON TRACK
-- **Key action date:** Next week (DevOps focused on HIPAA remediation; target: week-end readiness)
-- **Major blocker:** Subscription-per-environment architecture approval pending
+- **Key action date:** By Jun 19 (Complete 10 of 13 remediation user stories; by Jun 22 finalize subscription vs. resource group decision)
+- **Major blocker:** 3 user stories waiting for Sean's return from vacation; architecture decision pending client finalization
 
 ## Notes
 When you update this file after each EoD report:
