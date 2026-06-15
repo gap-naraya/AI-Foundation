@@ -7,12 +7,12 @@
 | Documento y Estructura | 10 | 0 | 10 | Portada completa, tabla de contenidos precisa, secciones bien organizadas y explicaciones claras |
 | Plan de Calidad | 20 | 0 | 20 | Listas de verificación, jerarquía de pruebas clara (Test Plan → Test Cycle → Test Case), pruebas unitarias con JUnit 5 y Jasmine/Karma, pruebas de rendimiento con Postman y JMeter, Definition of Done exhaustiva |
 | Plan de Riesgos | 20 | 0 | 20 | 12 riesgos identificados en todas las áreas, matriz probabilidad-impacto con color coding, planes de mitigación y contingencia para riesgos críticos |
-| Plan de Configuración | 10 | -1 | 9 | Herramientas, flujo Git, reglas de repositorio y convenciones de commits bien definidas. Falta especificación explícita de 3 ambientes de despliegue (desarrollo, staging, producción) |
+| Plan de Configuración | 10 | -2 | 8 | Herramientas, flujo Git, reglas de repositorio y convenciones de commits bien definidas. Falta especificación explícita de 3 ambientes de despliegue (desarrollo, staging, producción) |
 | Plan de Estándares | 20 | 0 | 20 | Paleta de colores con códigos HEX, tipografía, nomenclatura de controles y componentes de interfaz excepcionalmente detallados; estándares de codificación y documentación exhaustivos |
-| Plan de Gestión del Tiempo | 20 | -3 | 17 | WBS y diagrama de red presentes pero con nodos sin etiquetas claras que indiquen paquetes de trabajo específicos o dependencias con duraciones |
-| | **100** | **-4** | **96** | |
+| Plan de Gestión del Tiempo | 20 | -15 | 5 | WBS y diagrama de red no son lo que se pidio. |
+| | **100** | **-17** | **83** | |
 
-## Calificación Final: **96 / 100**
+## Calificación Final: **83 / 100**
 
 ---
 
@@ -30,8 +30,8 @@
 
 1. **Ambientes de despliegue no explícitamente definidos**: El Plan de Configuración describe Git Flow, convenciones de commits y reglas del repositorio, pero no define claramente los 3 ambientes de despliegue esperados (Desarrollo, Staging, Producción). Aunque mencionan "main" como estable, falta especificar dónde se prueba antes de producción y cómo se maneja la promoción entre ambientes.
 
-2. **Estructura de desglose de trabajo (WBS) necesita etiquetas descriptivas**: El diagrama WBS muestra nodos numerados (1.1.1 a 1.11.3) pero no identifica qué representa cada nodo. Debería incluir nombres de paquetes de trabajo claros como "Módulo de Autenticación", "Gestión de Ligas y Torneos", "Generación de Fixtures", "Transmisión en Vivo", etc. Esto dificultaría el seguimiento efectivo del proyecto sin entender la descomposición de trabajo.
+2. **Estructura de desglose de trabajo (EDT) necesita etiquetas descriptivas y estructura jerarquica**: El diagrama EDT muestra nodos que no tienen estructura jerarquica como vimos en clase, adicionalemente hay hitos y paquetes de trabajo que no aplican, recuerden que la EDT debe de venir con el trabajo a realizar, elemento como **Mantenimiento y Soporte** formaba parte del ejercicio pero eso no aplicaba para lo que ustedes tenian que hacer. Se los mencione en clase de hecho. Adicionalmente no le asignaron los identificadores unicos por lo que es dificil que haya trazabilidad.
 
-3. **Diagrama de red carece de claridad en tasks y duraciones**: El diagrama de red muestra conexiones entre nodos con color coding, pero falta: (a) nombres claros de tareas en cada nodo, (b) duraciones estimadas de cada actividad, (c) identificación explícita del camino crítico, (d) hitos clave del proyecto. Esto impide que el equipo identifique rápidamente cuáles tareas son críticas versus flexibles.
+3. **Diagrama de red carece de fundamento**: El diagrama de red muestra conexiones entre nodos pero como no pusieron identificadores ni la tabla de dependencias entonces no hay forma de validar lo que se implemento ahi. Adicionalmente, como vimos en clases, si la EDT no esta bien hecha, el diagrama de red queda sin sentido y no provee valor. Les recomiendo que actualicen ambas para la validacion a la hora de crear la ERS.
 
-¡Excelente trabajo del equipo CoffeeCommits! Este Plan General demuestra disciplina, pensamiento sistemático y atención al detalle. Los ajustes finales en WBS, diagrama de red y especificación de ambientes completarían un documento de clase mundial.
+¡Muy buen trabajo en general CoffeeCommits! Favor poner mas atencion en clases y consultar en caso de dudas para poder brindarles apoyo en lo que venga.
