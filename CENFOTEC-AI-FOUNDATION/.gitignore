@@ -1,0 +1,28 @@
+# Ignore student submissions (but keep folder structure)
+submissions/**/*.pdf
+submissions/**/*.doc
+submissions/**/*.docx
+submissions/**/*.txt
+submissions/**/*.xls
+submissions/**/*.xlsx
+submissions/**/*.ppt
+submissions/**/*.pptx
+submissions/**/*.zip
+submissions/**/*.rar
+
+# Keep .gitkeep files to maintain folder structure
+!submissions/**/.gitkeep
+
+# Ignore OS files
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Ignore environment files
+.env
+.env.local
+*.pem
+*.key
