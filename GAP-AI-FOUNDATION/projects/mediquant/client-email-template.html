@@ -12,7 +12,7 @@
 <!-- Header -->
 <div style="border-bottom:3px solid #2c3e50; padding-bottom:20px; margin-bottom:30px;">
     <h1 style="margin:0 0 12px 0; color:#2c3e50; font-size:28px; font-weight:600;">DOM PROJECT STATUS UPDATE</h1>
-    <div style="color:#7f8c8d; font-size:13px; margin:0;">June 10, 2026</div>
+    <div style="color:#7f8c8d; font-size:13px; margin:0;">{{DATE}}</div>
 </div>
 
 <!-- Executive Summary -->
@@ -20,82 +20,71 @@
     <div style="font-weight:600; margin-bottom:15px; color:#2c3e50; font-size:15px;">Executive Summary</div>
     <div>
         <p style="font-size:14px; margin:0 0 12px 0; color:#333; line-height:1.6;">
-            <strong>Core Team Execution:</strong> Infrastructure provisioning is advancing toward completion. We have successfully completed the Security Group and privileged accounts association for Databricks. However, a missing configuration detail is currently preventing workspace login—we have escalated this to your IT team and expect resolution today. The Security Add-on deployment remains on schedule for today. In parallel, the Operational Portal team continues making strong progress on fixing known defects, with two items remaining in the current iteration (targeted for closure by June 12th). The team must also complete mandatory MQ Security training to maintain active account status. Full progress will resume once Databricks access is restored.
+            <strong>Infrastructure & Environment:</strong> {{INFRASTRUCTURE_SUMMARY}}
         </p>
         <p style="font-size:14px; margin:0; color:#333; line-height:1.6;">
-            <strong>Compliance & Architecture Review:</strong> We have completed our analysis phase and the formal proposal is ready for presentation to your team today. EastinIT has requested clarifications, which we have now submitted. Upon your approval, we will transition this work to your Security team for implementation. We have identified remediation items ready to begin once user story planning is finalized and DevOps resources are available—our DevOps engineer is currently focused on resolving Databricks infrastructure issues. A subscription-per-environment architecture discussion with your team is ongoing.
+            <strong>HIPAA Compliance & Policy Remediation:</strong> {{COMPLIANCE_SUMMARY}}
         </p>
     </div>
 </div>
 
 <!-- Workstream 1 -->
 <div style="margin-bottom:35px;">
-    <div style="font-size:16px; font-weight:600; color:#2c3e50; margin-bottom:15px; padding-bottom:10px; border-bottom:2px solid #ecf0f1;">CORE TEAM EXECUTION – <span style="color:#e74c3c;">AT RISK</span></div>
+    <div style="font-size:16px; font-weight:600; color:#2c3e50; margin-bottom:15px; padding-bottom:10px; border-bottom:2px solid #ecf0f1;">INFRASTRUCTURE & ENVIRONMENT – <span style="color:{{INFRASTRUCTURE_STATUS_COLOR}};">{{INFRASTRUCTURE_STATUS}}</span></div>
 
     <div style="margin-bottom:15px; font-size:14px; color:#333;">
-        <div style="margin-bottom:3px;"><strong>Objective:</strong></div>
-        <div style="color:#555;">Fully functional, testable environment (HiTrust/HIPAA-compliant) by June 5</div>
+        <div style="margin-bottom:3px;"><strong>Goal:</strong></div>
+        <div style="color:#555;">{{INFRASTRUCTURE_GOAL}}</div>
     </div>
 
-    <div style="margin-bottom:20px; font-size:14px; font-weight:600; color:#2c3e50;">Progress: 87% complete (21 of 24 tasks)</div>
+    <div style="margin-bottom:20px; font-size:14px; font-weight:600; color:#2c3e50;">Status: {{INFRASTRUCTURE_PROGRESS}}</div>
 
     <div style="padding:16px; border-left:4px solid #27ae60; margin-bottom:18px; border-radius:4px; background-color:#f0fdf4;">
-        <div style="font-weight:600; margin-bottom:10px; color:#1e8449; font-size:14px;">Delivered:</div>
+        <div style="font-weight:600; margin-bottom:10px; color:#1e8449; font-size:14px;">Progress This Cycle:</div>
         <ul style="margin:0; padding-left:20px; font-size:14px; color:#333; line-height:1.8;">
-            <li style="margin-bottom:6px;">Databricks Security Group and privileged accounts association completed</li>
-            <li>Security Add-on deployment targeted for today</li>
+            {{INFRASTRUCTURE_DELIVERED}}
         </ul>
     </div>
 
     <div style="padding:16px; border-left:4px solid #e74c3c; border-radius:4px; background-color:#fef5f5;">
-        <div style="font-weight:600; margin-bottom:10px; color:#c0392b; font-size:14px;">Issues:</div>
+        <div style="font-weight:600; margin-bottom:10px; color:#c0392b; font-size:14px;">Current Constraints:</div>
         <ul style="margin:0; padding-left:20px; font-size:14px; color:#333; line-height:1.8;">
-            <li style="margin-bottom:6px;">Databricks workspace login blocked by missing configuration detail (your IT team support in progress)</li>
-            <li style="margin-bottom:6px;">Operational Portal: two open defects in current iteration (targeted for closure by June 12th)</li>
-            <li>Team must complete mandatory MQ Security training to maintain active account status</li>
+            {{INFRASTRUCTURE_CONSTRAINTS}}
         </ul>
     </div>
 </div>
 
 <!-- Workstream 2 -->
 <div style="margin-bottom:35px;">
-    <div style="font-size:16px; font-weight:600; color:#2c3e50; margin-bottom:15px; padding-bottom:10px; border-bottom:2px solid #ecf0f1;">COMPLIANCE & ARCHITECTURE REVIEW – <span style="color:#e74c3c;">AT RISK</span></div>
+    <div style="font-size:16px; font-weight:600; color:#2c3e50; margin-bottom:15px; padding-bottom:10px; border-bottom:2px solid #ecf0f1;">HIPAA COMPLIANCE & POLICY REMEDIATION – <span style="color:{{COMPLIANCE_STATUS_COLOR}};">{{COMPLIANCE_STATUS}}</span></div>
 
     <div style="margin-bottom:15px; font-size:14px; color:#333;">
-        <div style="margin-bottom:3px;"><strong>Objective:</strong></div>
-        <div style="color:#555;">EastinIT Architecture Design assessment delivered by June 5</div>
+        <div style="margin-bottom:3px;"><strong>Goal:</strong></div>
+        <div style="color:#555;">{{COMPLIANCE_GOAL}}</div>
     </div>
 
-    <div style="margin-bottom:20px; font-size:14px; font-weight:600; color:#2c3e50;">Progress: 86% complete (6 of 7 tasks)</div>
+    <div style="margin-bottom:20px; font-size:14px; font-weight:600; color:#2c3e50;">Status: {{COMPLIANCE_PROGRESS}}</div>
 
     <div style="padding:16px; border-left:4px solid #27ae60; margin-bottom:18px; border-radius:4px; background-color:#f0fdf4;">
-        <div style="font-weight:600; margin-bottom:10px; color:#1e8449; font-size:14px;">Delivered:</div>
+        <div style="font-weight:600; margin-bottom:10px; color:#1e8449; font-size:14px;">Progress This Cycle:</div>
         <ul style="margin:0; padding-left:20px; font-size:14px; color:#333; line-height:1.8;">
-            <li style="margin-bottom:6px;">Architecture analysis and review completed</li>
-            <li style="margin-bottom:6px;">Formal proposal prepared for presentation to your team</li>
-            <li>EastinIT clarification questions submitted</li>
+            {{COMPLIANCE_DELIVERED}}
         </ul>
     </div>
 
-    <div style="padding:16px; border-left:4px solid #e74c3c; border-radius:4px; background-color:#fef5f5;">
-        <div style="font-weight:600; margin-bottom:10px; color:#c0392b; font-size:14px;">Issues:</div>
+    <div style="padding:16px; border-left:4px solid #ecf0f1; border-radius:4px; background-color:#fafbfc;">
+        <div style="font-weight:600; margin-bottom:10px; color:#555; font-size:14px;">Constraints:</div>
         <ul style="margin:0; padding-left:20px; font-size:14px; color:#333; line-height:1.8;">
-            <li style="margin-bottom:6px;">Formal proposal awaiting review and approval (presentation to your team scheduled today)</li>
-            <li style="margin-bottom:6px;">User story creation required before DevOps can begin remediation work</li>
-            <li>Subscription-per-environment architecture discussion with your team in progress</li>
+            {{COMPLIANCE_CONSTRAINTS}}
         </ul>
     </div>
 </div>
 
 <!-- Actions Required -->
 <div style="padding:25px; background-color:#f8f9fa; border-radius:4px; border:1px solid #e8e8e8; margin-bottom:35px;">
-    <h3 style="margin:0 0 18px 0; color:#2c3e50; font-size:16px; font-weight:600;">ACTIONS REQUIRED</h3>
+    <h3 style="margin:0 0 18px 0; color:#2c3e50; font-size:16px; font-weight:600;">CRITICAL PATH ITEMS</h3>
     <ol style="margin:0; padding-left:20px; color:#333; font-size:14px; line-height:1.9;">
-        <li style="margin-bottom:10px;"><strong>Today:</strong> Present formal proposal to your team; obtain approval to proceed to Security team</li>
-        <li style="margin-bottom:10px;"><strong>Today:</strong> Your IT team resolve Databricks workspace login configuration</li>
-        <li style="margin-bottom:10px;"><strong>Today:</strong> Complete Security Add-on provisioning</li>
-        <li style="margin-bottom:10px;"><strong>Jun 12:</strong> Close two open Operational Portal defects (iteration closure)</li>
-        <li><strong>Jun 12:</strong> All team members complete mandatory MQ Security training</li>
+        {{ACTIONS_REQUIRED}}
     </ol>
 </div>
 

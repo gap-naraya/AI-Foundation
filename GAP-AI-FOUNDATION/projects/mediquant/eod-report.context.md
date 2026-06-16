@@ -38,11 +38,10 @@ stakeholder cast, acronyms, and recurring themes.
 
 ### 2. Compliance & Architecture Review
 
-- **Objective:** EastinIT Architecture Design assessment delivered by
-  **June 5**
-  *(do not change unless officially re-baselined)*
-- **Most recent reported state:** OFF TRACK, 86% complete (6 of 7
-  tasks) as of Jun 05, 2026
+- **Objective:** Complete the first 10 tasks group of HIPAA remediation plan by
+  **June 19**
+  *(do not change unless officially re-baselined — ask me for new objective when complete)*
+- **Most recent reported state:** ON TRACK, 1 of 10 weekly tasks complete as of Jun 15, 2026
 
 ---
 
@@ -53,6 +52,8 @@ stakeholder cast, acronyms, and recurring themes.
 - Ken Manley <kenm@mediquant.com> (client executive)
 
 **Cc (GAP team members):**
+- Gerardo Mora <gmora@growthaccelerationpartners.com> (GAP leadership)
+- Sean Smith <ssmith@growthaccelerationpartners.com> (Architecture/compliance lead)
 - Milagro Prado Vasquez <mprado@growthaccelerationpartners.com>
 - Matt Veitch <matt.veitch@growthaccelerationpartners.com>
 - Steven Yelton <syelton@growthaccelerationpartners.com>
