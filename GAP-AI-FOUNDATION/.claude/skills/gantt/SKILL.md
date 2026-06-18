@@ -327,6 +327,14 @@ def build_hierarchy(items: list, sprints: list) -> list:
     features = [item for item in items if item.get('Work Item Type') == 'Feature']
     non_features = [item for item in items if item.get('Work Item Type') != 'Feature']
     
+    # Build a map of feature_id -> children for efficient lookup
+    children_map = {}
+    for non_feature in non_features:
+        parent_id = str(non_feature.get('Parent', ''))
+        if parent_id not in children_map:
+            children_map[parent_id] = []
+        children_map[parent_id].append(non_feature)
+    
     rows = []
     processed = set()
     
@@ -338,33 +346,37 @@ def build_hierarchy(items: list, sprints: list) -> list:
         sprint = map_to_sprint(feature.get('Iteration Path', ''), sprints)
         is_risk, risk_reason = detect_risk(feature, sprints)
         
+        # Calculate sum of children's story points
+        children = children_map.get(f_id, [])
+        child_points_total = sum(child.get('Story Points', 0) for child in children)
+        
         rows.append({
             "type": "feature",
             "item": feature,
             "ws": ws,
             "sprint": sprint,
             "risk": is_risk,
-            "risk_reason": risk_reason
+            "risk_reason": risk_reason,
+            "child_points_total": child_points_total
         })
         
-        for non_feature in non_features:
-            parent_id = str(non_feature.get('Parent', ''))
-            if parent_id == f_id and str(non_feature.get('ID', '')) not in processed:
-                processed.add(str(non_feature.get('ID', '')))
-                
-                ws = classify_workstream(non_feature)
-                sprint = map_to_sprint(non_feature.get('Iteration Path', ''), sprints)
-                is_risk, risk_reason = detect_risk(non_feature, sprints)
-                
-                rows.append({
-                    "type": "child",
-                    "item": non_feature,
-                    "ws": ws,
-                    "sprint": sprint,
-                    "risk": is_risk,
-                    "risk_reason": risk_reason
-                })
+        for child in children:
+            processed.add(str(child.get('ID', '')))
+            
+            ws = classify_workstream(child)
+            sprint = map_to_sprint(child.get('Iteration Path', ''), sprints)
+            is_risk, risk_reason = detect_risk(child, sprints)
+            
+            rows.append({
+                "type": "child",
+                "item": child,
+                "ws": ws,
+                "sprint": sprint,
+                "risk": is_risk,
+                "risk_reason": risk_reason
+            })
     
+    # Add orphaned non-features (those not assigned to any feature)
     for non_feature in non_features:
         nf_id = str(non_feature.get('ID', ''))
         if nf_id not in processed:
@@ -459,8 +471,18 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
         title_cell.alignment = Alignment(wrap_text=True, indent=indent)
         
         ws.cell(row=row_idx, column=4).value = item.get("Assigned To", "")
-        ws.cell(row=row_idx, column=5).value = ws_label
-        ws.cell(row=row_idx, column=6).value = item.get("Story Points", 0)
+        
+        # Workstream: blank for features (they span multiple workstreams), value for children
+        if is_feature:
+            ws.cell(row=row_idx, column=5).value = ""
+        else:
+            ws.cell(row=row_idx, column=5).value = ws_label
+        
+        # Points: sum of children for features, individual for children
+        if is_feature:
+            ws.cell(row=row_idx, column=6).value = row_desc.get("child_points_total", 0)
+        else:
+            ws.cell(row=row_idx, column=6).value = item.get("Story Points", 0)
         
         # Apply row fill to first 6 columns
         for col_idx in range(1, 7):
@@ -488,17 +510,35 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
             risk_cell.font = Font(name="Calibri", bold=True, color=COLOR_RISK_FLAG)
             risk_cell.fill = PatternFill("solid", fgColor=COLOR_RISK_FILL)
     
-    # Column widths
-    ws.column_dimensions["A"].width = 8
-    ws.column_dimensions["B"].width = 14
-    ws.column_dimensions["C"].width = 42
-    ws.column_dimensions["D"].width = 20
-    ws.column_dimensions["E"].width = 18  # Workstream column
-    ws.column_dimensions["F"].width = 8   # Points column
+    # Auto-fit column widths based on content
+    def get_column_width(ws, col_idx, min_width=8):
+        """Calculate column width based on content."""
+        max_length = min_width
+        col_letter = get_column_letter(col_idx)
+        for cell in ws[col_letter]:
+            try:
+                if cell.value:
+                    cell_length = len(str(cell.value))
+                    if cell_length > max_length:
+                        max_length = cell_length
+            except:
+                pass
+        return min(max_length * 1.2, 100)  # Cap at 100 to prevent extremely wide columns
     
+    # Auto-fit columns A through F
+    for col_idx in range(1, 7):
+        col_letter = get_column_letter(col_idx)
+        ws.column_dimensions[col_letter].width = get_column_width(ws, col_idx)
+    
+    # Auto-fit sprint columns (G onwards)
     for i in range(len(sprints)):
-        ws.column_dimensions[get_column_letter(7 + i)].width = 16
-    ws.column_dimensions[get_column_letter(risk_col)].width = 32
+        col_idx = 7 + i
+        col_letter = get_column_letter(col_idx)
+        ws.column_dimensions[col_letter].width = get_column_width(ws, col_idx, min_width=12)
+    
+    # Auto-fit risk column
+    col_letter = get_column_letter(risk_col)
+    ws.column_dimensions[col_letter].width = get_column_width(ws, risk_col, min_width=15)
     
     ws.row_dimensions[1].height = 36
     
