@@ -124,9 +124,11 @@ ADO_CSV_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/pro
 SPRINT_CAL_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/projects/mediquant/gantt/sprint-calendar.md")
 OUTPUT_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/projects/mediquant/gantt/gantt-chart.xlsx")
 
-# Workstream keywords
-WS1_KEYWORDS = ["infrastructure", "databricks", "ci/cd", "pipeline", "azure", "environment", "terraform", "devops", "provisioning", "workspace"]
-WS2_KEYWORDS = ["hipaa", "compliance", "policy", "remediation", "audit", "security", "hitrust"]
+# Workstream keywords (adjust for your project's workstreams)
+# For Data Platform: WS1 = Backend/Core, WS2 = Portal/UI
+# For Mediquant DOM: WS1 = Infrastructure, WS2 = HIPAA Compliance
+WS1_KEYWORDS = ["backend", "core", "data", "pipeline", "ingestion", "automation", "infrastructure", "databricks", "ci/cd", "devops", "terraform"]
+WS2_KEYWORDS = ["portal", "ui", "frontend", "interface", "hipaa", "compliance", "policy", "remediation", "audit", "security"]
 
 # Overloaded resources
 OVERLOADED_ASSIGNEES = ["roberto", "cesar"]
@@ -190,7 +192,7 @@ def parse_sprint_calendar(path: Path) -> tuple[list, int]:
     return sprints, current_idx
 
 def parse_ado_csv(path: Path) -> list:
-    """Parse ADO export CSV. Returns list of item dicts."""
+    """Parse ADO export CSV. Returns list of item dicts. Handles title hierarchy."""
     items = []
     try:
         with open(path, 'r', encoding='utf-8-sig') as f:
@@ -199,6 +201,14 @@ def parse_ado_csv(path: Path) -> list:
                 if row is None:
                     continue
                 clean_row = {k.strip(): v.strip() if v else "" for k, v in row.items()}
+                
+                # Merge title hierarchy: prefer Title 3 (story), then Title 2 (feature), then Title 1 (project)
+                title3 = clean_row.get('Title 3', '').strip()
+                title2 = clean_row.get('Title 2', '').strip()
+                title1 = clean_row.get('Title 1', '').strip()
+                
+                merged_title = title3 if title3 else (title2 if title2 else title1)
+                clean_row['Title'] = merged_title
                 
                 try:
                     clean_row['Story Points'] = int(clean_row.get('Story Points', 0) or 0)
@@ -227,15 +237,16 @@ def classify_workstream(item: dict) -> str:
     return "UNCLASSIFIED"
 
 def map_to_sprint(iteration_path: str, sprints: list) -> str:
-    """Extract iteration label from Iteration Path. Handles suffixes (e.g., 'DOM\Iteration 370 - Q3' -> 'Iteration 370')."""
+    """Extract iteration label from Iteration Path. Handles both old and new ADO formats."""
     if not iteration_path:
         return None
     
+    # Extract the last path segment (e.g., 'Data Platform\Backlog\Current\Iteration 370 - Bye Week 2' -> 'Iteration 370 - Bye Week 2')
     parts = iteration_path.split('\\')
-    label = parts[-1].strip() if len(parts) > 1 else iteration_path.strip()
+    label = parts[-1].strip() if len(parts) > 0 else iteration_path.strip()
     
+    # Match against sprint calendar using substring (handles suffixes like "- Bye Week 2")
     for sprint in sprints:
-        # Substring match to handle optional suffixes (e.g., "Iteration 370 - Q3" contains "Iteration 370")
         if sprint['label'].lower() in label.lower():
             return sprint['label']
     
