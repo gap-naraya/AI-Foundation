@@ -191,6 +191,14 @@ def parse_sprint_calendar(path: Path) -> tuple[list, int]:
     
     return sprints, current_idx
 
+def clean_assignee(assigned_to: str) -> str:
+    """Extract name from 'Name <email>' format. Returns just the name."""
+    if not assigned_to:
+        return ""
+    # Split on '<' and take the first part (name)
+    name = assigned_to.split('<')[0].strip()
+    return name if name else assigned_to
+
 def parse_ado_csv(path: Path) -> list:
     """Parse ADO export CSV. Returns list of item dicts. Handles title hierarchy."""
     items = []
@@ -209,6 +217,9 @@ def parse_ado_csv(path: Path) -> list:
                 
                 merged_title = title3 if title3 else (title2 if title2 else title1)
                 clean_row['Title'] = merged_title
+                
+                # Clean assignee: remove email, keep just name
+                clean_row['Assigned To'] = clean_assignee(clean_row.get('Assigned To', ''))
                 
                 try:
                     clean_row['Story Points'] = int(clean_row.get('Story Points', 0) or 0)
