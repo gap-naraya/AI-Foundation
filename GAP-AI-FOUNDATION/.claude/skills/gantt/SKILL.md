@@ -274,7 +274,7 @@ def detect_risk(item: dict, sprints: list) -> tuple[bool, str]:
     
     return (len(reasons) > 0, ' | '.join(reasons))
 
-def build_hierarchy(items: list) -> list:
+def build_hierarchy(items: list, sprints: list) -> list:
     """Build Feature -> Story/Task hierarchy. Returns flat list of row descriptors."""
     item_map = {str(item.get('ID', '')): item for item in items}
     
@@ -289,8 +289,8 @@ def build_hierarchy(items: list) -> list:
         processed.add(f_id)
         
         ws = classify_workstream(feature)
-        sprint = map_to_sprint(feature.get('Iteration Path', ''), [])
-        is_risk, risk_reason = detect_risk(feature, [])
+        sprint = map_to_sprint(feature.get('Iteration Path', ''), sprints)
+        is_risk, risk_reason = detect_risk(feature, sprints)
         
         rows.append({
             "type": "feature",
@@ -307,8 +307,8 @@ def build_hierarchy(items: list) -> list:
                 processed.add(str(non_feature.get('ID', '')))
                 
                 ws = classify_workstream(non_feature)
-                sprint = map_to_sprint(non_feature.get('Iteration Path', ''), [])
-                is_risk, risk_reason = detect_risk(non_feature, [])
+                sprint = map_to_sprint(non_feature.get('Iteration Path', ''), sprints)
+                is_risk, risk_reason = detect_risk(non_feature, sprints)
                 
                 rows.append({
                     "type": "child",
@@ -325,8 +325,8 @@ def build_hierarchy(items: list) -> list:
             processed.add(nf_id)
             
             ws = classify_workstream(non_feature)
-            sprint = map_to_sprint(non_feature.get('Iteration Path', ''), [])
-            is_risk, risk_reason = detect_risk(non_feature, [])
+            sprint = map_to_sprint(non_feature.get('Iteration Path', ''), sprints)
+            is_risk, risk_reason = detect_risk(non_feature, sprints)
             
             rows.append({
                 "type": "child",
@@ -477,7 +477,7 @@ def main():
         print(f"  Risk items flagged: {risk_count}")
         
         print("Building hierarchy...")
-        rows = build_hierarchy(items)
+        rows = build_hierarchy(items, sprints)
         
         print("Generating Excel workbook...")
         wb = create_gantt_workbook(rows, sprints, current_idx)
