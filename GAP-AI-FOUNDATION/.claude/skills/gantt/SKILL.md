@@ -124,11 +124,28 @@ ADO_CSV_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/pro
 SPRINT_CAL_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/projects/mediquant/gantt/sprint-calendar.md")
 OUTPUT_PATH = Path("/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/projects/mediquant/gantt/gantt-chart.xlsx")
 
-# Workstream keywords (adjust for your project's workstreams)
-# For Data Platform: WS1 = Backend/Core, WS2 = Portal/UI
-# For Mediquant DOM: WS1 = Infrastructure, WS2 = HIPAA Compliance
-WS1_KEYWORDS = ["backend", "core", "data", "pipeline", "ingestion", "automation", "infrastructure", "databricks", "ci/cd", "devops", "terraform"]
-WS2_KEYWORDS = ["portal", "ui", "frontend", "interface", "hipaa", "compliance", "policy", "remediation", "audit", "security"]
+# Workstream keywords and names
+# Data Platform workstreams with assigned team members
+WORKSTREAM_BACKEND = {
+    "name": "Backend",
+    "keywords": ["backend", "api", "core", "data", "pipeline", "ingestion", "automation"],
+    "assignee": "Aristides"
+}
+WORKSTREAM_FRONTEND = {
+    "name": "Frontend",
+    "keywords": ["portal", "ui", "frontend", "interface", "react", "screen"],
+    "assignee": "Jean Pierre"
+}
+WORKSTREAM_DEVOPS = {
+    "name": "DevOps",
+    "keywords": ["devops", "ci/cd", "infrastructure", "terraform", "azure", "workspace", "pipeline"],
+    "assignee": "Roberto"
+}
+WORKSTREAM_DATA_ENG = {
+    "name": "Data Engineering",
+    "keywords": ["data", "databricks", "ml", "ai", "engineer", "spark"],
+    "assignee": "Cesar"
+}
 
 # Overloaded resources
 OVERLOADED_ASSIGNEES = ["roberto", "cesar"]
@@ -137,10 +154,15 @@ OVERLOADED_ASSIGNEES = ["roberto", "cesar"]
 HIGH_POINTS_THRESHOLD = 8
 
 # Color palette (openpyxl hex, no #)
-COLOR_WS1_HEADER = "2C3E50"
-COLOR_WS2_HEADER = "1A5276"
-COLOR_WS1_FILL = "D6EAF8"
-COLOR_WS2_FILL = "D5F5E3"
+# Feature row colors by workstream
+FEATURE_COLORS = {
+    "Backend": "2C3E50",           # Dark blue-gray
+    "Frontend": "1A5276",          # Dark navy
+    "DevOps": "154360",            # Dark teal
+    "Data Engineering": "1B4965"   # Dark slate blue
+}
+# Child row colors (light blue for all, since user prefers blue hierarchy)
+COLOR_CHILD = "D6EAF8"            # Light blue for all children
 COLOR_SPRINT_ACTIVE = "2ECC71"
 COLOR_SPRINT_CURRENT = "F39C12"
 COLOR_RISK_FILL = "FADBD8"
@@ -234,18 +256,20 @@ def parse_ado_csv(path: Path) -> list:
     return items
 
 def classify_workstream(item: dict) -> str:
-    """Classify item into WS1, WS2, or UNCLASSIFIED."""
-    text = (item.get('Title', '') + ' ' + item.get('Tags', '')).lower()
+    """Classify item into workstream by keyword matching."""
+    text = (item.get('Title', '') + ' ' + item.get('Tags', '') + ' ' + item.get('Assigned To', '')).lower()
     
-    ws2_match = any(kw in text for kw in WS2_KEYWORDS)
-    if ws2_match:
-        return "WS2"
+    # Check in priority order (more specific first)
+    if any(kw in text for kw in WORKSTREAM_BACKEND["keywords"]):
+        return WORKSTREAM_BACKEND["name"]
+    if any(kw in text for kw in WORKSTREAM_FRONTEND["keywords"]):
+        return WORKSTREAM_FRONTEND["name"]
+    if any(kw in text for kw in WORKSTREAM_DEVOPS["keywords"]):
+        return WORKSTREAM_DEVOPS["name"]
+    if any(kw in text for kw in WORKSTREAM_DATA_ENG["keywords"]):
+        return WORKSTREAM_DATA_ENG["name"]
     
-    ws1_match = any(kw in text for kw in WS1_KEYWORDS)
-    if ws1_match:
-        return "WS1"
-    
-    return "UNCLASSIFIED"
+    return "Unclassified"
 
 def map_to_sprint(iteration_path: str, sprints: list) -> str:
     """Extract iteration label from Iteration Path. Handles both old and new ADO formats."""
@@ -355,7 +379,7 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = "Gantt Chart"
-    ws.freeze_panes = "F2"
+    ws.freeze_panes = "G2"  # Freeze ID, Type, Title, Assignee, Workstream, Points columns
     
     # Header row
     header_font = Font(name="Calibri", bold=True, color="FFFFFF", size=11)
@@ -366,16 +390,17 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
     ws["B1"] = "Type"
     ws["C1"] = "Title"
     ws["D1"] = "Assignee"
-    ws["E1"] = "Points"
+    ws["E1"] = "Workstream"
+    ws["F1"] = "Points"
     
-    for col in ["A1", "B1", "C1", "D1", "E1"]:
+    for col in ["A1", "B1", "C1", "D1", "E1", "F1"]:
         ws[col].font = header_font
         ws[col].fill = header_fill
         ws[col].alignment = header_align
     
-    # Sprint columns
+    # Sprint columns (start at column 7 / G, since we added Workstream column)
     for i, sprint in enumerate(sprints):
-        col = 6 + i
+        col = 7 + i
         cell = ws.cell(row=1, column=col)
         start_str = sprint["start"].strftime("%b %d")
         end_str = sprint["end"].strftime("%b %d")
@@ -385,7 +410,7 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
         cell.alignment = header_align
     
     # Risk column
-    risk_col = 6 + len(sprints)
+    risk_col = 7 + len(sprints)
     risk_cell = ws.cell(row=1, column=risk_col)
     risk_cell.value = "Risk / Notes"
     risk_cell.font = header_font
@@ -396,17 +421,17 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
     for row_idx, row_desc in enumerate(rows, start=2):
         item = row_desc["item"]
         is_feature = row_desc["type"] == "feature"
-        ws_label = row_desc.get("ws", "UNCLASSIFIED")
+        ws_label = row_desc.get("ws", "Unclassified")
         assigned_sprint = row_desc.get("sprint")
         is_risk = row_desc.get("risk", False)
         risk_reason = row_desc.get("risk_reason", "")
         
         if is_feature:
-            fill_hex = COLOR_WS1_HEADER if ws_label == "WS1" else COLOR_WS2_HEADER
+            fill_hex = FEATURE_COLORS.get(ws_label, "2C3E50")  # Default to dark blue if not found
             font_color = "FFFFFF"
             indent = 0
         else:
-            fill_hex = COLOR_WS1_FILL if ws_label == "WS1" else COLOR_WS2_FILL
+            fill_hex = COLOR_CHILD  # Light blue for all child rows
             font_color = "000000"
             indent = 1
         
@@ -414,7 +439,7 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
         if is_risk and not is_feature:
             row_fill = PatternFill("solid", fgColor=COLOR_RISK_FILL)
         
-        # Static columns
+        # Static columns (A-F)
         ws.cell(row=row_idx, column=1).value = str(item.get("ID", ""))
         ws.cell(row=row_idx, column=2).value = item.get("Work Item Type", "")
         
@@ -423,18 +448,19 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
         title_cell.alignment = Alignment(wrap_text=True, indent=indent)
         
         ws.cell(row=row_idx, column=4).value = item.get("Assigned To", "")
-        ws.cell(row=row_idx, column=5).value = item.get("Story Points", 0)
+        ws.cell(row=row_idx, column=5).value = ws_label
+        ws.cell(row=row_idx, column=6).value = item.get("Story Points", 0)
         
-        # Apply row fill to first 5 columns
-        for col_idx in range(1, 6):
+        # Apply row fill to first 6 columns
+        for col_idx in range(1, 7):
             cell = ws.cell(row=row_idx, column=col_idx)
             if row_fill:
                 cell.fill = row_fill
             cell.font = Font(name="Calibri", bold=is_feature, color=font_color)
         
-        # Sprint columns
+        # Sprint columns (start at column 7)
         for i, sprint in enumerate(sprints):
-            col_idx = 6 + i
+            col_idx = 7 + i
             cell = ws.cell(row=row_idx, column=col_idx)
             if assigned_sprint and sprint["label"].lower() == assigned_sprint.lower():
                 cell.fill = PatternFill("solid", fgColor=COLOR_SPRINT_ACTIVE)
@@ -456,10 +482,11 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
     ws.column_dimensions["B"].width = 14
     ws.column_dimensions["C"].width = 42
     ws.column_dimensions["D"].width = 20
-    ws.column_dimensions["E"].width = 8
+    ws.column_dimensions["E"].width = 18  # Workstream column
+    ws.column_dimensions["F"].width = 8   # Points column
     
     for i in range(len(sprints)):
-        ws.column_dimensions[get_column_letter(6 + i)].width = 16
+        ws.column_dimensions[get_column_letter(7 + i)].width = 16
     ws.column_dimensions[get_column_letter(risk_col)].width = 32
     
     ws.row_dimensions[1].height = 36
