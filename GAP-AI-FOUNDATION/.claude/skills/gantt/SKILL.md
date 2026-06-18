@@ -321,7 +321,7 @@ def detect_risk(item: dict, sprints: list) -> tuple[bool, str]:
     return (len(reasons) > 0, ' | '.join(reasons))
 
 def build_hierarchy(items: list, sprints: list) -> list:
-    """Build Feature -> Story/Task hierarchy with summed story points for features."""
+    """Build Feature -> Story/Task hierarchy. Returns flat list of row descriptors."""
     item_map = {str(item.get('ID', '')): item for item in items}
     
     features = [item for item in items if item.get('Work Item Type') == 'Feature']
@@ -334,10 +334,6 @@ def build_hierarchy(items: list, sprints: list) -> list:
         f_id = str(feature.get('ID', ''))
         processed.add(f_id)
         
-        # Calculate total story points from all children
-        children = [nf for nf in non_features if str(nf.get('Parent', '')) == f_id]
-        total_points = sum(int(nf.get('Story Points', 0)) for nf in children)
-        
         ws = classify_workstream(feature)
         sprint = map_to_sprint(feature.get('Iteration Path', ''), sprints)
         is_risk, risk_reason = detect_risk(feature, sprints)
@@ -348,27 +344,25 @@ def build_hierarchy(items: list, sprints: list) -> list:
             "ws": ws,
             "sprint": sprint,
             "risk": is_risk,
-            "risk_reason": risk_reason,
-            "display_points": total_points  # Sum of children for display
+            "risk_reason": risk_reason
         })
         
-        for child in children:
-            child_id = str(child.get('ID', ''))
-            if child_id not in processed:
-                processed.add(child_id)
+        for non_feature in non_features:
+            parent_id = str(non_feature.get('Parent', ''))
+            if parent_id == f_id and str(non_feature.get('ID', '')) not in processed:
+                processed.add(str(non_feature.get('ID', '')))
                 
-                ws = classify_workstream(child)
-                sprint = map_to_sprint(child.get('Iteration Path', ''), sprints)
-                is_risk, risk_reason = detect_risk(child, sprints)
+                ws = classify_workstream(non_feature)
+                sprint = map_to_sprint(non_feature.get('Iteration Path', ''), sprints)
+                is_risk, risk_reason = detect_risk(non_feature, sprints)
                 
                 rows.append({
                     "type": "child",
-                    "item": child,
+                    "item": non_feature,
                     "ws": ws,
                     "sprint": sprint,
                     "risk": is_risk,
-                    "risk_reason": risk_reason,
-                    "display_points": int(child.get('Story Points', 0))  # Individual points
+                    "risk_reason": risk_reason
                 })
     
     for non_feature in non_features:
@@ -386,8 +380,7 @@ def build_hierarchy(items: list, sprints: list) -> list:
                 "ws": ws,
                 "sprint": sprint,
                 "risk": is_risk,
-                "risk_reason": risk_reason,
-                "display_points": int(non_feature.get('Story Points', 0))
+                "risk_reason": risk_reason
             })
     
     return rows
@@ -467,9 +460,7 @@ def create_gantt_workbook(rows: list, sprints: list, current_sprint_idx: int) ->
         
         ws.cell(row=row_idx, column=4).value = item.get("Assigned To", "")
         ws.cell(row=row_idx, column=5).value = ws_label
-        # Display: sum of children for features, individual points for children
-        display_pts = row_desc.get("display_points", item.get("Story Points", 0))
-        ws.cell(row=row_idx, column=6).value = display_pts
+        ws.cell(row=row_idx, column=6).value = item.get("Story Points", 0)
         
         # Apply row fill to first 6 columns
         for col_idx in range(1, 7):
