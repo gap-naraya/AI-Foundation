@@ -32,6 +32,7 @@ Executing a complex project currently off-track, creating monetary and business 
 The following skills activate only when working in GAP-AI-FOUNDATION:
 
 - `/eod` — Daily Mediquant status report generation
+- `/gantt` — Weekly Gantt chart Excel generator from ADO CSV export (for Ken & Shawn)
 - `/escalate-gerardo` — Escalate blockers to Gerardo (manager)
 - `/draft-message` — Draft professional communications (Slack, email)
 - `/level3-portfolio` — GAP AI Impact Evaluation portfolio
