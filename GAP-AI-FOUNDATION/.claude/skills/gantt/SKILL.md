@@ -320,74 +320,117 @@ def detect_risk(item: dict, sprints: list) -> tuple[bool, str]:
     
     return (len(reasons) > 0, ' | '.join(reasons))
 
+def get_hierarchy_level(item: dict) -> int:
+    """Determine hierarchy level based on which Title field is filled (1, 2, or 3)."""
+    if item.get('Title 3', '').strip():
+        return 3  # Story/Task level
+    elif item.get('Title 2', '').strip():
+        return 2  # Feature level
+    elif item.get('Title 1', '').strip():
+        return 1  # Project level
+    return 0
+
 def build_hierarchy(items: list, sprints: list) -> list:
-    """Build Feature -> Story/Task hierarchy with summed story points for features."""
+    """Build Title 1/2/3 hierarchy using Parent field, with story point summation."""
     item_map = {str(item.get('ID', '')): item for item in items}
     
-    features = [item for item in items if item.get('Work Item Type') == 'Feature']
-    non_features = [item for item in items if item.get('Work Item Type') != 'Feature']
+    # Categorize by level
+    title1_items = [item for item in items if get_hierarchy_level(item) == 1]
+    title2_items = [item for item in items if get_hierarchy_level(item) == 2]
+    title3_items = [item for item in items if get_hierarchy_level(item) == 3]
     
     rows = []
     processed = set()
     
-    for feature in features:
-        f_id = str(feature.get('ID', ''))
-        processed.add(f_id)
+    # Process Title 1 items (Projects) - parent of Title 2
+    for title1 in title1_items:
+        t1_id = str(title1.get('ID', ''))
+        processed.add(t1_id)
         
-        # Calculate total story points from all children
-        children = [nf for nf in non_features if str(nf.get('Parent', '')) == f_id]
-        total_points = sum(int(nf.get('Story Points', 0)) for nf in children)
+        # Find Title 2 items that are children of this Title 1
+        children_t2 = [t2 for t2 in title2_items if str(t2.get('Parent', '')) == t1_id]
+        # Sum of all Title 2 points (Title 2 shows sum of their Title 3 children)
+        total_points = 0
+        for t2 in children_t2:
+            t2_id = str(t2.get('ID', ''))
+            children_t3 = [t3 for t3 in title3_items if str(t3.get('Parent', '')) == t2_id]
+            t2_total = sum(int(t3.get('Story Points', 0)) for t3 in children_t3)
+            total_points += t2_total
         
-        ws = classify_workstream(feature)
-        sprint = map_to_sprint(feature.get('Iteration Path', ''), sprints)
-        is_risk, risk_reason = detect_risk(feature, sprints)
+        sprint = map_to_sprint(title1.get('Iteration Path', ''), sprints)
+        is_risk, risk_reason = detect_risk(title1, sprints)
         
         rows.append({
-            "type": "feature",
-            "item": feature,
-            "ws": ws,
+            "type": "title1",
+            "item": title1,
+            "ws": "Unclassified",  # Title 1 has no workstream
             "sprint": sprint,
             "risk": is_risk,
             "risk_reason": risk_reason,
-            "display_points": total_points  # Sum of children for display
+            "display_points": total_points
         })
         
-        for child in children:
-            child_id = str(child.get('ID', ''))
-            if child_id not in processed:
-                processed.add(child_id)
+        # Add Title 2 children
+        for title2 in children_t2:
+            t2_id = str(title2.get('ID', ''))
+            if t2_id not in processed:
+                processed.add(t2_id)
                 
-                ws = classify_workstream(child)
-                sprint = map_to_sprint(child.get('Iteration Path', ''), sprints)
-                is_risk, risk_reason = detect_risk(child, sprints)
+                # Find Title 3 items that are children of this Title 2
+                children_t3 = [t3 for t3 in title3_items if str(t3.get('Parent', '')) == t2_id]
+                total_t3_points = sum(int(t3.get('Story Points', 0)) for t3 in children_t3)
+                
+                sprint = map_to_sprint(title2.get('Iteration Path', ''), sprints)
+                is_risk, risk_reason = detect_risk(title2, sprints)
                 
                 rows.append({
-                    "type": "child",
-                    "item": child,
-                    "ws": ws,
+                    "type": "title2",
+                    "item": title2,
+                    "ws": "Unclassified",  # Title 2 has no workstream
                     "sprint": sprint,
                     "risk": is_risk,
                     "risk_reason": risk_reason,
-                    "display_points": int(child.get('Story Points', 0))  # Individual points
+                    "display_points": total_t3_points
                 })
+                
+                # Add Title 3 children
+                for title3 in children_t3:
+                    t3_id = str(title3.get('ID', ''))
+                    if t3_id not in processed:
+                        processed.add(t3_id)
+                        
+                        ws = classify_workstream(title3)  # Only Title 3 gets workstream
+                        sprint = map_to_sprint(title3.get('Iteration Path', ''), sprints)
+                        is_risk, risk_reason = detect_risk(title3, sprints)
+                        
+                        rows.append({
+                            "type": "title3",
+                            "item": title3,
+                            "ws": ws,
+                            "sprint": sprint,
+                            "risk": is_risk,
+                            "risk_reason": risk_reason,
+                            "display_points": int(title3.get('Story Points', 0))
+                        })
     
-    for non_feature in non_features:
-        nf_id = str(non_feature.get('ID', ''))
-        if nf_id not in processed:
-            processed.add(nf_id)
-            
-            ws = classify_workstream(non_feature)
-            sprint = map_to_sprint(non_feature.get('Iteration Path', ''), sprints)
-            is_risk, risk_reason = detect_risk(non_feature, sprints)
+    # Handle orphaned items (no parent, shouldn't occur but safety)
+    for item in items:
+        item_id = str(item.get('ID', ''))
+        if item_id not in processed:
+            processed.add(item_id)
+            level = get_hierarchy_level(item)
+            ws = classify_workstream(item) if level == 3 else "Unclassified"
+            sprint = map_to_sprint(item.get('Iteration Path', ''), sprints)
+            is_risk, risk_reason = detect_risk(item, sprints)
             
             rows.append({
-                "type": "child",
-                "item": non_feature,
+                "type": f"title{level}",
+                "item": item,
                 "ws": ws,
                 "sprint": sprint,
                 "risk": is_risk,
                 "risk_reason": risk_reason,
-                "display_points": int(non_feature.get('Story Points', 0))
+                "display_points": int(item.get('Story Points', 0))
             })
     
     return rows
