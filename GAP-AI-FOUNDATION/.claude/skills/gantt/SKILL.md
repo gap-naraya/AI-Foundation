@@ -227,7 +227,7 @@ def classify_workstream(item: dict) -> str:
     return "UNCLASSIFIED"
 
 def map_to_sprint(iteration_path: str, sprints: list) -> str:
-    """Extract iteration label from Iteration Path (e.g., 'DOM\Iteration 370' -> 'Iteration 370')."""
+    """Extract iteration label from Iteration Path. Handles suffixes (e.g., 'DOM\Iteration 370 - Q3' -> 'Iteration 370')."""
     if not iteration_path:
         return None
     
@@ -235,7 +235,8 @@ def map_to_sprint(iteration_path: str, sprints: list) -> str:
     label = parts[-1].strip() if len(parts) > 1 else iteration_path.strip()
     
     for sprint in sprints:
-        if sprint['label'].lower() == label.lower():
+        # Substring match to handle optional suffixes (e.g., "Iteration 370 - Q3" contains "Iteration 370")
+        if sprint['label'].lower() in label.lower():
             return sprint['label']
     
     return None
@@ -537,6 +538,26 @@ If the script fails, print the error and stop. Tell Nelson to check:
 5. Run `/gantt` in Claude Code
 
 **Note:** ADO's CSV export sometimes includes a UTF-8 BOM. The Python script handles this automatically.
+
+---
+
+## Bye Week Planning Logic
+
+**Key principle:** Do NOT allocate planned backlog items to bye weeks. Bye weeks are flex/buffer capacity.
+
+**How it works in the Gantt:**
+- Bye weeks (1-week iterations like 370, 377, 384) appear as **empty rows with no assigned work**
+- Work is only assigned to 2-week iterations
+- Projected completion date is calculated using **only 2-week iterations** (bye weeks excluded from the calculation)
+
+**Strategic use of bye weeks:**
+- Unplanned work (urgent fixes, production issues)
+- Technical debt and infrastructure improvements
+- Team capacity recovery
+- Schedule buffer / deadline contingency
+- Any ad-hoc project needs that emerge between planning cycles
+
+**Recommendation:** When reviewing the Gantt, if the projected completion date is tight, flag to Nelson that bye weeks (370, 377, 384, etc.) provide additional buffer capacity that can absorb overruns or unplanned work without slipping the final deadline.
 
 ---
 
