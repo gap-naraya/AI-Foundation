@@ -256,17 +256,28 @@ def parse_ado_csv(path: Path) -> list:
     return items
 
 def classify_workstream(item: dict) -> str:
-    """Classify item into workstream by keyword matching."""
-    text = (item.get('Title', '') + ' ' + item.get('Tags', '') + ' ' + item.get('Assigned To', '')).lower()
+    """Classify item into workstream by assignee name first, then keywords."""
+    assignee = item.get('Assigned To', '').lower()
+    title_tags = (item.get('Title', '') + ' ' + item.get('Tags', '')).lower()
     
-    # Check in priority order (more specific first)
-    if any(kw in text for kw in WORKSTREAM_BACKEND["keywords"]):
+    # First, check by assignee name (most reliable)
+    if 'aristides' in assignee:
         return WORKSTREAM_BACKEND["name"]
-    if any(kw in text for kw in WORKSTREAM_FRONTEND["keywords"]):
+    if 'jean' in assignee:
         return WORKSTREAM_FRONTEND["name"]
-    if any(kw in text for kw in WORKSTREAM_DEVOPS["keywords"]):
+    if 'roberto' in assignee:
         return WORKSTREAM_DEVOPS["name"]
-    if any(kw in text for kw in WORKSTREAM_DATA_ENG["keywords"]):
+    if 'cesar' in assignee:
+        return WORKSTREAM_DATA_ENG["name"]
+    
+    # Fall back to keyword matching if no assignee match
+    if any(kw in title_tags for kw in WORKSTREAM_BACKEND["keywords"]):
+        return WORKSTREAM_BACKEND["name"]
+    if any(kw in title_tags for kw in WORKSTREAM_FRONTEND["keywords"]):
+        return WORKSTREAM_FRONTEND["name"]
+    if any(kw in title_tags for kw in WORKSTREAM_DEVOPS["keywords"]):
+        return WORKSTREAM_DEVOPS["name"]
+    if any(kw in title_tags for kw in WORKSTREAM_DATA_ENG["keywords"]):
         return WORKSTREAM_DATA_ENG["name"]
     
     return "Unclassified"
