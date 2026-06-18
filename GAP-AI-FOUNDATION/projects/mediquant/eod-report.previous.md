@@ -1,16 +1,16 @@
 # Previous EoD Report Snapshot
-**Last updated:** June 16, 2026
+**Last updated:** June 18, 2026
 
 ## Core Team Execution
-- **Progress:** 92% complete (22 of 24 tasks)
-- **Status:** AT RISK
-- **Key action date:** Today (Complete validation/closure of 4 defects in testing); TBD (Restore Databricks workspace access)
-- **Major blocker:** Databricks workspace access blocked; task momentum stalled—team focused on defect testing only
+- **Progress:** 85% complete (22 of 26 tasks)
+- **Status:** DELAYED
+- **Key action date:** Jun 19 (Close testing cycle on 7 prepared defects + validate 2 in-test defects)
+- **Major blocker:** Scope expansion from 24 to 26 tasks; testing velocity critical to timeline recovery
 
 ## Compliance & Architecture Review
-- **Progress:** 10% complete (1 of 10 weekly remediation tasks; infrastructure remediation concurrent—16 of 32 resources fixed)
+- **Progress:** 50% complete (5 of 10 weekly remediation tasks)
 - **Status:** ON TRACK
-- **Key action date:** Today (Complete 16 remaining infrastructure resources); By Jun 19 (Complete 10 of 13 HIPAA remediation user stories)
+- **Key action date:** Jun 19 (Complete remaining 5 HIPAA remediation tasks)
 - **Major blocker:** None
 
 ## Notes

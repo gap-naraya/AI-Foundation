@@ -38,6 +38,12 @@ In a Claude conversation, paste this prompt:
 
 > Run EoD helper for [project]. Raw notes: [paste today's notes]
 
+**CRITICAL: Always specify the day of the week.** Paste:
+
+> Run EoD helper for [project]. Date: [Day Mon DD, YYYY] Raw notes: [paste today's notes]
+
+Example: `Run EoD helper for Mediquant. Date: Thu Jun 18, 2026. Raw notes: ...`
+
 **Default behavior:** Uses current context + lightweight previous snapshot (`eod-report.previous.md`) for slippage detection. Generates STANDARD (Slack) + CLIENT EMAIL.
 
 **Optional:** To also see OPTIMIZED version (trajectory tags + slippage markers), add: "Also generate OPTIMIZED."
