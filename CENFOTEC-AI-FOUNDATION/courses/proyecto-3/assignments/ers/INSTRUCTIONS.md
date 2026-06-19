@@ -103,6 +103,8 @@ Esta sesión debe dividirse por módulos.
 
 #### Requerimientos Funcionales
 
+**Opción A — En el documento:**
+
 Los requerimientos funcionales deben contener la siguiente información:
 
 1. **Identificador único**
@@ -116,6 +118,16 @@ Los requerimientos funcionales deben contener la siguiente información:
    - TODA la funcionalidad que debe de cumplir el requerimiento
    - Incluir validaciones de campos
    - Incluir manejo de excepciones
+
+**Opción B — En un proyecto JIRA:**
+
+Si prefieres documentar los requerimientos funcionales en un proyecto JIRA, esta sección debe contener **únicamente un enlace al proyecto JIRA**. El proyecto debe incluir:
+
+- **Epics** que representen los módulos del sistema
+- **User Stories** con toda la información requerida (descritos arriba), distribuida en los campos de JIRA (descripción, criterios de aceptación, prioridad, linked issues para dependencias, etc.)
+- Todos los requerimientos deben cumplir con los mismos estándares de calidad: claro, conciso, completo, consistente, verificable, rastreable, factible y necesario.
+
+**Nota:** Elige una opción (A o B). No se requiere JIRA; es una alternativa para documentar los requerimientos funcionales si lo prefieres.
 
 #### Requerimientos No Funcionales
 
