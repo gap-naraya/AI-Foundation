@@ -146,24 +146,24 @@ If no rubric exists, proceed with holistic evaluation (0–100 scale with discla
 
 ## Step 5 — Create Grade Breakdown Table
 
-Produce a table showing:
-- **Criterion name**
-- **Max points**
-- **Points lost** (as negative, e.g., -5)
-- **Points earned** (calculated: max − lost)
-- **Notes** (reason for each deduction)
+Produce a table showing (in Spanish):
+- **Criterio** (Criterion name)
+- **Máximo** (Max points)
+- **Perdido** (Points lost, as negative, e.g., -5)
+- **Ganado** (Points earned, calculated: max − lost)
+- **Notas** (reason for each deduction)
 
 **Format:**
 
 ```
-| Criterion         | Max | Lost | Earned | Notes                              |
-|-------------------|-----|------|--------|------------------------------------|
-| Content depth     |  30 |   -5 |     25 | Missing analysis on topic X        |
-| Structure         |  20 |    0 |     20 | Clear and well-organized           |
-| Sources/Evidence  |  20 |  -10 |     10 | Only 2 references, needed 5+       |
-| Presentation      |  15 |   -3 |     12 | Minor formatting inconsistencies   |
-| Conclusions       |  15 |    0 |     15 | Strong and well-argued             |
-|                   | 100 |  -18 | **82** |                                    |
+| Criterio | Máximo | Perdido | Ganado | Notas |
+|----------|--------|---------|--------|-------|
+| Profundidad de contenido | 30 | -5 | 25 | Falta análisis en tema X |
+| Estructura | 20 | 0 | 20 | Claro y bien organizado |
+| Fuentes/Evidencia | 20 | -10 | 10 | Solo 2 referencias, se necesitan 5+ |
+| Presentación | 15 | -3 | 12 | Inconsistencias menores de formato |
+| Conclusiones | 15 | 0 | 15 | Argumento fuerte y bien justificado |
+| | 100 | -18 | **82** | |
 ```
 
 **Rules:**
@@ -175,11 +175,11 @@ Produce a table showing:
 
 ## Step 6 — Write Feedback
 
-After the grade breakdown table, write **2–3 paragraphs of personalized feedback**:
+After the grade breakdown table, write **3 sections of personalized feedback in Spanish**:
 
-1. **Strengths** — what the student/group did well (specific, not generic)
-2. **Areas for improvement** — what needs work, with concrete suggestions
-3. **Encouragement** — how they can improve next time
+1. **Fortalezas** — what the student/group did well (as bullet list with specific examples, not generic)
+2. **Áreas de mejora** — what needs work with concrete suggestions (as bullet list with specific deductions)
+3. **Próximos pasos** — how they can improve next time (as flowing paragraph with actionable recommendations)
 
 **Tone:**
 - Constructive (focus on growth, not punishment)
@@ -187,16 +187,23 @@ After the grade breakdown table, write **2–3 paragraphs of personalized feedba
 - Kind but honest (if something is weak, name it clearly)
 - Supportive (assumes the student wants to improve)
 
-**Example for a weak essay:**
+**Example for a weak essay (in Spanish with bullet lists):**
 
 ```
-### Feedback
+### Retroalimentación
 
-**Strengths:** You clearly understand the main concept and your introduction sets up the argument well. The examples you provided from the case study are directly relevant.
+**Fortalezas:**
+- Demuestran comprensión clara del concepto principal.
+- La introducción establece bien el argumento y orienta al lector.
+- Los ejemplos del caso de estudio son directamente relevantes.
+- La estructura general es lógica y fácil de seguir.
 
-**Areas for improvement:** The essay needs stronger evidence. You cited only two sources when the assignment asks for at least five. Additionally, your conclusion rushes the main argument—consider expanding it to synthesize your key points more thoroughly. Pay attention to citation formatting; APA style requires specific formatting for quotes.
+**Áreas de mejora:**
+- **Evidencia insuficiente:** Solo citaron 2 fuentes cuando el trabajo requiere mínimo 5. Esto debilita los argumentos principales.
+- **Conclusión débil:** El párrafo final apresura el argumento en lugar de sintetizar los puntos clave. Necesita expansión.
+- **Formato de citas incorrecto:** No siguen el estilo APA requerido. Las comillas y referencias necesitan corrección.
 
-**Next steps:** For your next essay, spend time finding sources early so you have variety in your evidence. Outline your conclusion before writing so you have space to fully develop it.
+**Próximos pasos:** Para el próximo trabajo, dediquen tiempo a la búsqueda de fuentes desde el inicio para tener variedad en su evidencia. Preparen un esquema de la conclusión antes de escribir para asegurar espacio suficiente para desarrollarla completamente. Revisen las guías de formato APA antes de entregar.
 ```
 
 ---
@@ -213,22 +220,32 @@ Create the `reviews/[COURSE]/[ASSIGNMENT]/feedback/` folder if it doesn't exist.
 
 ## Step 8 — File Format
 
-**Feedback file structure:**
+**Feedback file structure (in Spanish):**
 
 ```markdown
 # [Assignment Name] — [Subject Name]
 
-## Grade Breakdown
+## Desglose de Calificación
 
-| Criterion | Max | Lost | Earned | Notes |
-|-----------|-----|------|--------|-------|
+| Criterio | Máximo | Perdido | Ganado | Notas |
+|----------|--------|---------|--------|-------|
 | ... |
 
-## Final Grade: **82 / 100**
+## Calificación Final: **82 / 100**
 
-### Feedback
+### Retroalimentación
 
-[Your feedback paragraphs here]
+**Fortalezas:**
+- [Bullet point 1]
+- [Bullet point 2]
+- [Bullet point 3]
+
+**Áreas de mejora:**
+- [Bullet point 1]
+- [Bullet point 2]
+- [Bullet point 3]
+
+**Próximos pasos:** [Flowing paragraph with actionable recommendations]
 ```
 
 ---
