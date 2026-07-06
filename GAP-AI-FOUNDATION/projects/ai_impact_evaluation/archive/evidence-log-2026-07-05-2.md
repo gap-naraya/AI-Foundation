@@ -226,26 +226,6 @@
 - **Evidence of process refinement:** Process design improvement for project maintainability; reduces noise in version control
 - **Deployed:** June 2026 | **Status:** ✅ APPROVED
 
-#### 4.9: Merge /level3-portfolio and /portfolio-scan into Unified /portfolio Skill ✅ APPROVED 2026-07-05
-- **What it is:** Consolidated two separate portfolio management skills (`/level3-portfolio` + `/portfolio-scan`) into a single unified `/portfolio` skill with 6 integrated modes (scan, approve, audit, draft, map, update)
-- **Files:** `/Users/naraya/Documents/AI-Foundation/GAP-AI-FOUNDATION/.claude/skills/portfolio/SKILL.md`
-- **Evidence of design sophistication:** Demonstrates ability to recognize competing systems and refactor them into a coherent, single-entry-point architecture. Reduces user cognitive load while maintaining all functionality (Dimension 4: designs multi-step AI workflows, creates reusable blueprints)
-- **Architecture improvement:** Single skill with clear mode routing, unified trigger interface, combined operational and strategic capabilities
-- **Deployed:** July 5, 2026 | **Status:** ✅ APPROVED
-
-#### 4.10: Create Unified Portfolio Skill Infrastructure with 6-Mode Orchestration ✅ APPROVED 2026-07-05
-- **What it is:** Comprehensive portfolio automation system integrating scanning, staging, approval, auditing, evaluation drafting, work mapping, and manual evidence logging into a cohesive 6-mode skill
-- **Files:**
-  - `.claude/skills/portfolio/SKILL.md` (8.7 KB, 6 integrated modes with clear routing)
-  - `.claude/skills/portfolio/agents/evidence-scanner.md` (7.7 KB, sub-agent orchestration)
-- **Evidence of orchestration sophistication:** Production-grade workflow demonstrating:
-  - Multi-step orchestration (scan → stage → approve → log)
-  - Archive safety (automatic backup before writes)
-  - Deduplication logic (prevents duplicate evidence)
-  - Human-in-the-loop validation (user approval gates)
-  - Sub-agent integration (evidence-scanner sub-agent)
-- **Deployed:** July 5, 2026 | **Status:** ✅ APPROVED
-
 ---
 
 ## Dimension 5: AI as Multiplier Across Teams 🔶 (NOT YET STARTED)
