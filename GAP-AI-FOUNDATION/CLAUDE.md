@@ -35,4 +35,8 @@ The following skills activate only when working in GAP-AI-FOUNDATION:
 - `/gantt` — Weekly Gantt chart Excel generator from ADO CSV export (for Ken & Shawn)
 - `/escalate-gerardo` — Escalate blockers to Gerardo (manager)
 - `/draft-message` — Draft professional communications (Slack, email)
-- `/level3-portfolio` — GAP AI Impact Evaluation portfolio
+- `/portfolio` — Level 3 AI Impact Evaluation portfolio (6 modes: scan, approve, audit, draft, map, update)
+  - **Automated daily scan:** Cloud routine runs 5pm Costa Rica time, detects new evidence, reports findings
+
+**Additional Resources:**
+- **Level 3 Portfolio Helper:** `helpers/portfolio-builder.md` — Detection engine and dimension mapping logic

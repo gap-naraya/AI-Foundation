@@ -44,7 +44,7 @@ GAP-AI-FOUNDATION/
     ├── eod-report/                   # Daily status report generation skill
     ├── escalate-gerardo/             # Manager escalation skill
     ├── draft-message/                # Professional message drafting skill
-    └── level3-portfolio/             # AI impact evaluation portfolio skill
+    └── portfolio/                    # AI impact evaluation portfolio skill (6 modes)
 ```
 
 ---
@@ -86,10 +86,24 @@ Draft Slack messages, emails, or sensitive communications to specific people.
 
 **Triggers:** "draft a message to", "write an email to", "how do I tell [name]"
 
-### 4. `/level3-portfolio` — AI Impact Evaluation
-Track and prepare evidence for the GAP AI Impact Evaluation (October re-evaluation).
+### 4. `/portfolio` — AI Impact Evaluation Portfolio (6 Modes)
+Unified skill for tracking, auditing, and preparing evidence for the GAP AI Impact Evaluation (October re-evaluation).
 
-**Triggers:** "Level 3", "AI assessment", "Transformer", "certification", "portfolio"
+**Six Modes:**
+- **scan** — Auto-detect evidence from git commits and file changes
+- **approve** — Review and commit staged findings to evidence log (archive-safe)
+- **audit** — Review all 5 dimensions; identify gaps and action items
+- **draft [N]** — Write evaluation form answer for a specific dimension
+- **map** — Analyze if a task qualifies as evidence
+- **update** — Log manual evidence (time metrics, peer feedback)
+
+**Daily Routine:** Cloud agent runs **5pm Costa Rica time** daily, detects new evidence, reports findings. You review and approve locally with `/portfolio approve`.
+- View routine results: https://claude.ai/code/routines
+- Next run: Tomorrow at 5pm Costa Rica time
+
+**Triggers:** "portfolio", "scan portfolio", "portfolio audit", "portfolio draft", "portfolio map", "portfolio update", "Level 3", "AI assessment", "evidence", "merit increase"
+
+📖 Full documentation: `helpers/portfolio-builder.md`
 
 ---
 
@@ -301,6 +315,7 @@ Both projects share the foundational rules and values defined in `/Users/naraya/
 
 ---
 
-**Last Updated:** June 11, 2026  
+**Last Updated:** July 5, 2026  
+**Portfolio System Status:** ✅ Live — Daily automated scans running, 7 evidence items approved  
 **Maintained By:** Nelson Araya Alvarado  
 **Organization:** Growth Acceleration Partners (GAP)
