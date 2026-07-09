@@ -246,50 +246,6 @@
   - Sub-agent integration (evidence-scanner sub-agent)
 - **Deployed:** July 5, 2026 | **Status:** ✅ APPROVED
 
-#### 4.11: Portfolio Skill Consolidation & 6-Mode Orchestration Refactor ✅ APPROVED 2026-07-08
-- **What it is:** Consolidated two separate portfolio management skills (`/level3-portfolio` + `/portfolio-scan`) into a single unified `/portfolio` skill with 6 integrated modes (scan, approve, audit, draft, map, update)
-- **Files:** 
-  - Deleted: `.claude/skills/level3-portfolio/SKILL.md`
-  - Created: `.claude/skills/portfolio/SKILL.md` (10.2 KB, production-grade)
-  - Created: `.claude/skills/portfolio/agents/evidence-scanner.md` (7.7 KB, sub-agent)
-- **Evidence of design sophistication:** Demonstrates ability to recognize competing systems and refactor them into coherent, single-entry-point architecture. Reduces user cognitive load while maintaining all functionality. Shows architectural judgment: when to consolidate vs. when to split.
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
-#### 4.12: Portfolio Builder Helper Infrastructure ✅ APPROVED 2026-07-08
-- **What it is:** Complete portfolio-scanning helper system with detection engine, signal mapping, and dimension logic
-- **Files:** `helpers/portfolio-builder.md` (4.1 KB, detection engine)
-- **Evidence of design:** Meta-level demonstration of process design sophistication; creates reusable blueprints for autonomous portfolio management. Shows ability to abstract complex logic into teachable patterns.
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
-#### 4.13: Portfolio Scan Infrastructure & Safety Mechanisms ✅ APPROVED 2026-07-08
-- **What it is:** Snapshot tracking system (`evidence-scan.snapshot.md`) for lightweight state management across scan runs
-- **Files:**
-  - Created: `projects/ai_impact_evaluation/evidence-scan.snapshot.md`
-  - Created: `projects/ai_impact_evaluation/evidence-staging.md`
-- **Evidence of sophistication:** Shows understanding of stateful systems; uses lightweight snapshot pattern (reuses design from EoD previous-report system) to avoid context bloat and prevent duplicate scans. Demonstrates knowledge transfer across projects.
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
-#### 4.14: Archive Safety System for Evidence Log ✅ APPROVED 2026-07-08
-- **What it is:** Automatic backup system that archives the evidence log before any approval write (timestamp-versioned backups)
-- **Files:**
-  - Created: `projects/ai_impact_evaluation/archive/evidence-log-2026-07-05.md` (14.7 KB)
-  - Created: `projects/ai_impact_evaluation/archive/evidence-log-2026-07-05-2.md` (14.8 KB)
-- **Evidence of thoughtfulness:** Implements explicit safety mechanisms for destructive operations (writes to evidence-log.md). Shows production-grade thinking: prevent data loss before it happens. Audit-friendly: every version is recoverable.
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
-#### 4.15: Documentation of Unified Portfolio System in CLAUDE.md ✅ APPROVED 2026-07-08
-- **What it is:** Updated CLAUDE.md and README.md to document the unified `/portfolio` skill as the authoritative system for Level 3 portfolio management
-- **Files:**
-  - Modified: `CLAUDE.md`
-  - Modified: `README.md`
-- **Evidence of communication:** Makes the portfolio system discoverable and reusable for other PMs. Shows ability to document systems for adoption (not just build them personally).
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
-#### 4.16: Portfolio System Lifecycle Completion (Deprecation of v1) ✅ APPROVED 2026-07-08
-- **What it is:** Completed migration from separate `/level3-portfolio` and `/portfolio-scan` skills to unified `/portfolio` skill; deprecated old system
-- **Evidence of iteration:** Shows maturity in system design — ability to recognize when a system has evolved beyond its original design and refactor it cleanly. No abandoned code; clean deprecation.
-- **Deployed:** July 5–8, 2026 | **Status:** ✅ APPROVED
-
 ---
 
 ## Dimension 5: AI as Multiplier Across Teams 🔶 (NOT YET STARTED)
@@ -338,10 +294,10 @@
 
 | Dimension | Status | Evidence | Gap |
 |---|---|---|---|
-| **1. Daily Workflow** | ✅ Ready | 6 major artifacts deployed and working | None |
+| **1. Daily Workflow** | ✅ Ready | 5 major artifacts deployed and working | None |
 | **2. Validation** | ✅ Ready | Human-in-the-loop, documented practice | None |
 | **3. Measurable Impact** | 🔶 Weak | Estimated; needs 2 weeks of quantified data | Complete metrics capture by July 1 |
-| **4. Process Design** | ✅ Strong | 16 sophisticated orchestration artifacts (6 new 2026-07-08) | Document as shareable PM guide |
+| **4. Process Design** | ✅ Ready | 4-layer Claude OS + reusable blueprint | Document as shareable PM guide |
 | **5. Team Multiplier** | 🔶 Weak | System built, no adoption yet | Share with Gerardo; measure adoption |
 
 ---

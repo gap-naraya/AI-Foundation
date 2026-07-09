@@ -9,13 +9,14 @@
 ## Current State
 
 ```
-Last scan: 2026-07-05 21:43 UTC
-Last approval: 2026-07-05 21:45 UTC
-Scan window: 2026-07-05 21:00 to 2026-07-05 21:43 UTC
-Items staged: 2
-Items approved: 2
-Status: All items promoted to evidence-log.md (items 4.9, 4.10 in Dimension 4)
-Archive: evidence-log-2026-07-05-2.md created
+Last scan: 2026-07-08 (current) UTC
+Last approval: 2026-07-08 (current) UTC
+Scan window: 2026-07-05 21:43 to 2026-07-08 UTC
+Items staged: 6
+Items approved: 6
+Status: All 6 items promoted to evidence-log.md (items 4.11–4.16 in Dimension 4)
+Archive: evidence-log-2026-07-08.md created
+Dimension 4 total: 16 items (was 10 as of July 5)
 ```
 
 ---
