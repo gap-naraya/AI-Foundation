@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Session closing — consider reviewing GAP-AI-FOUNDATION/projects/claude_expert/os-review-log.md for OS improvements.'"
+          }
+        ]
+      }
+    ]
+  }
+}

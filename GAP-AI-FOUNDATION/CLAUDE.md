@@ -36,7 +36,13 @@ The following skills activate only when working in GAP-AI-FOUNDATION:
 - `/escalate-gerardo` — Escalate blockers to Gerardo (manager)
 - `/draft-message` — Draft professional communications (Slack, email)
 - `/portfolio` — Level 3 AI Impact Evaluation portfolio (6 modes: scan, approve, audit, draft, map, update)
-  - **Automated daily scan:** Cloud routine runs 5pm Costa Rica time, detects new evidence, reports findings
+  - **Automated weekly scan:** Cloud routine runs every Monday at 10am Costa Rica time, detects new evidence, reports findings
+- `/team` — Consult your 4 expert advisors: **Software Architect** (design/architecture), **Risk Analyst** (project risk), **Senior Program Manager** (scope/stakeholder strategy), **Claude Expert** (Claude/Anthropic technical + OS improvements)
+  - Presents a menu; routes your question to the chosen expert
+  - Reuses the pattern: skill wraps expert agent invocation
+
+**Automation & Monitoring:**
+- **Claude Expert OS Review:** Runs automatically after every session closes to monitor interactions and surface OS-improvement opportunities. Results logged to `projects/claude_expert/os-review-log.md`. (Fallback: can be switched to weekly cloud routine if per-session cadence proves noisy.)
 
 **Additional Resources:**
 - **Level 3 Portfolio Helper:** `helpers/portfolio-builder.md` — Detection engine and dimension mapping logic

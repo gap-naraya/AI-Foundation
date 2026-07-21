@@ -15,7 +15,7 @@ Senior Program Manager at Mediquant account. Iteration manager reporting to Gera
 ## Tools & Daily Work
 - **Project management:** Azure DevOps
 - **Communication:** Microsoft Teams, Slack
-- **Cloud & Infrastructure:** Azure
+- **Cloud & Infrastructure:** Azure, .NET Core, React, Databricks, Terraform
 - **AI & Writing:** Claude, Copilot
 - **Office & IT:** Microsoft Office, internal IT tools
 
